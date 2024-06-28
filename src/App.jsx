@@ -1,9 +1,9 @@
+import Window from "./components/window/Window";
+
 function App() {
-  return (
-    <div style={{backgroundImage: "url('898403.jpg')"}} id="window" className="w-screen h-screen">
-      {/* <p className="">hello</p> */}
-    </div>
-  );
+  return <Window>
+    {/* <h1>heading</h1> */}
+  </Window>;
 }
 
 export default App;
