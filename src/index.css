@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  width: 0;
+  margin: 0;
+  box-sizing: border-box;
+  background: none;
+}
+
+#root {
+  height: 100dvh;
+  width: 100dvw;
+  overflow: hidden;
+}
+
+#window {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
