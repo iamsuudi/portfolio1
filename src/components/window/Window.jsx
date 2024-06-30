@@ -10,8 +10,10 @@ export default function Window({ children }) {
             className="w-[100dvw] h-[100dvh] relative flex flex-col"
         >
             <HeaderBar />
-            {children}
-            <SideBar />
+            <div className="flex w-full h-full">
+                <div className="w-full h-full border">{children}</div>
+                <SideBar />
+            </div>
         </div>
     );
 }
