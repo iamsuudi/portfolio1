@@ -1,8 +1,4 @@
 import WorkbenchIcon from "../../assets/WorkbenchIcon";
-import NightIcon from "../../assets/NightIcon";
-import WifiIcon from "../../assets/WifiIcon";
-import SoundIcon from "../../assets/SoundIcon";
-import BatteryIcon from "../../assets/BatteryIcon";
 import { useEffect } from "react";
 import { format } from "date-fns";
 import { useState } from "react";
@@ -16,7 +12,7 @@ import {
     Separator,
     Switch,
 } from "@radix-ui/themes";
-import { Cross2Icon } from "@radix-ui/react-icons";
+import { Cross2Icon, SpeakerLoudIcon } from "@radix-ui/react-icons";
 
 function Notification({ notification, remover }) {
     return (
@@ -123,7 +119,20 @@ export default function HeaderBar() {
         <div className="flex items-center justify-between w-full backdrop-blur-lg bg-black/30">
             <div className="flex px-4 py-1 rounded-2xl hover:bg-white/10">
                 <button className="">
-                    <WorkbenchIcon stroke={5} />
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={}
+                        stroke="currentColor"
+                        className={`size-6`}
+                    >
+                        <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M5 12h14"
+                        />
+                    </svg>
                 </button>
             </div>
             <div className="px-4 py-1 rounded-2xl hover:bg-white/10">
@@ -223,18 +232,47 @@ export default function HeaderBar() {
                 </DropdownMenu.Root>
             </div>
             <div className="px-4 py-1 rounded-2xl hover:bg-white/10">
-                <button className="flex items-center gap-3 ">
+                <button className="flex items-center gap-3">
                     <span className="text-sm">
-                        <NightIcon size={4} stroke={2} />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            strokeWidth={2}
+                            stroke="currentColor"
+                            className={`size-5`}
+                        >
+                            <path
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
+                            />
+                        </svg>
                     </span>
                     <span className="text-sm">
-                        <WifiIcon size={4} stroke={2} />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 -960 960 960"
+                            fill="#e8eaed"
+                            className="size-5"
+                        >
+                            <path d="M480-120 0-600q95-97 219.5-148.5T480-800q137 0 261 51t219 149L480-120ZM174-540q67-48 145-74t161-26q83 0 161 26t145 74l58-58q-79-60-172-91t-192-31q-99 0-192 31t-172 91l58 58Z" />
+                        </svg>
                     </span>
                     <span className="text-sm">
-                        <SoundIcon size={4} stroke={2} />
+                        <SpeakerLoudIcon />
                     </span>
-                    <span className="flex items-center text-sm">
-                        <BatteryIcon size={4} stroke={2} /> 53%
+                    <span className="flex items-center gap-2 text-sm">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor"
+                            className="size-5"
+                            viewBox="0 0 16 16"
+                        >
+                            <path d="M2 6h10v4H2z" />
+                            <path d="M2 4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm10 1a1 1 0 0 1 1 1v4a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm4 3a1.5 1.5 0 0 1-1.5 1.5v-3A1.5 1.5 0 0 1 16 8" />
+                        </svg>
+                        <span>100%</span>
                     </span>
                 </button>
             </div>
