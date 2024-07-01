@@ -3,6 +3,7 @@ import {
     Box,
     Dialog,
     Heading,
+    HoverCard,
     Separator,
     Tooltip,
 } from "@radix-ui/themes";
@@ -10,8 +11,8 @@ import {
 const items = [
     {
         avatar: "https://code.visualstudio.com/favicon.ico",
-        description: "Visual Studio Code",
-        title: "VS Code",
+        title: "Visual Studio Code",
+        description: "Code Editor",
     },
     {
         avatar: "https://vivaldi.com/wp-content/uploads/cropped-favicon-270x270.png",
@@ -25,98 +26,103 @@ const items = [
     },
     {
         avatar: "https://cdn.prod.website-files.com/64b6f3636f598299028e8577/64b6ffd4f3b22e830de0bfb1_Webclip%20-%20Warp.png",
-        description: "Warp Terminal",
+        description: "Terminal Code And Text Editor",
         title: "Warp",
     },
     {
         avatar: "linux.png",
-        description: "Linux",
+        description: "Linux System Adminstration",
         title: "Linux",
     },
     {
         avatar: "discord.png",
-        description: "Discord",
+        description: "Community of Devlopers",
         title: "Discord",
     },
     {
         avatar: "git.png",
-        description: "Git",
+        description: "Version Control System",
         title: "Git",
     },
     {
         avatar: "https://github.com/fluidicon.png",
-        description: "Github",
+        description: "Open Source Community",
         title: "Github",
     },
     {
         avatar: "vite.png",
-        description: "Vite",
+        description: "Development Environment",
         title: "Vite",
     },
     {
         avatar: "https://webpack.js.org/icon_512x512.png",
-        description: "Webpack",
+        description: "Bundling Tool",
         title: "Webpack",
     },
     {
         avatar: "slack.png",
-        description: "Slack",
+        description: "Project And Team Management",
         title: "Slack",
     },
     {
         avatar: "figma.png",
-        description: "Figma",
+        description: "Design Tool",
         title: "Figma",
     },
     {
         avatar: "https://mui.com/static/icons/180x180.png",
-        description: "Material UI",
+        description: "Component UI",
         title: "Material UI",
     },
     {
         avatar: "https://www.radix-ui.com/favicon.png",
-        description: "Radix UI",
+        description: "Component UI",
         title: "Radix UI",
     },
     {
         avatar: "https://img.daisyui.com/images/daisyui-logo/favicon-192.png",
-        description: "Daisy UI",
+        description: "Coponent UI",
         title: "Daisy UI",
     },
     {
         avatar: "https://ui.shadcn.com/apple-touch-icon.png",
-        description: "Shadcn/ui",
-        title: "Shadcn UI",
+        description: "Component UI",
+        title: "Shadcn/ui",
     },
     {
         avatar: "js.png",
-        description: "Javascript",
+        description: "Javascript Lang",
         title: "Javascript",
     },
     {
         avatar: "react.png",
-        description: "React Js",
+        description: "Frontend Javascript Framework",
         title: "React.js",
     },
     {
         avatar: "node.png",
-        description: "Node Js",
+        description: "Backend Javascript Running Environment",
         title: "Node.js",
     },
     {
         avatar: "https://expressjs.com/images/favicon.png",
-        description: "Express JS",
+        description: "Backend Framework",
         title: "Express.js",
     },
     {
         avatar: "https://www.typescriptlang.org/icons/icon-512x512.png?v=8944a05a8b601855de116c8a56d3b3ae",
-        description: "Typescript",
+        description: "Typescript Lang",
         title: "TypeScript",
     },
     {
         avatar: "graphql.png",
         description: "GraphQL API",
         title: "GraphQL",
+    },
+    {
+        avatar: "https://restfulapi.net/wp-content/uploads/cropped-rest-192x192.png",
+        description: "Rest API",
+        title: "RestAPI",
     },
     {
         avatar: "mongodb.png",
@@ -130,17 +136,27 @@ const items = [
     },
     {
         avatar: "https://jestjs.io/img/jest.png",
-        description: "Jest",
+        description: "Testing Framework",
         title: "Jest",
     },
     {
         avatar: "playwright.png",
-        description: "Playwright",
+        description: "End To End Testing Framework",
         title: "Playwright",
     },
     {
+        avatar: "https://vitest.dev/apple-touch-icon.png",
+        description: "Testing Framework",
+        title: "Vitest",
+    },
+    {
+        avatar: "https://nodejs.org/static/images/favicons/favicon.png",
+        description: "Native Node Testing",
+        title: "Node - Test",
+    },
+    {
         avatar: "https://www.python.org/static/apple-touch-icon-144x144-precomposed.png",
-        description: "Python",
+        description: "Python Lang",
         title: "Python",
     },
 ];
@@ -212,25 +228,25 @@ export default function SideBar() {
                         </Heading>
                         <div
                             id="notification-panel"
-                            className="flex flex-wrap items-start justify-start h-full gap-4 overflow-y-scroll"
+                            className="flex flex-wrap items-start justify-start h-full overflow-y-scroll gap-y-8 gap-x-4"
                         >
                             {items.map((item) => {
                                 return (
-                                    <button
-                                        key={item.avatar}
-                                        className="flex flex-col items-center gap-2 p-4 h-fit rounded-xl hover:bg-white/10"
-                                    >
-                                        <Tooltip content={item.description}>
-                                            <Avatar
-                                                size={"5"}
-                                                src={item.avatar}
-                                                className=""
-                                            />
-                                        </Tooltip>
-                                        <span className="text-xs font-boldd">
-                                            {item.title}
-                                        </span>
-                                    </button>
+                                    <HoverCard.Root key={item.avatar}>
+                                        <HoverCard.Trigger>
+                                            <button className="flex flex-col items-center gap-2 p-4 h-fit rounded-xl hover:bg-white/10">
+                                                <Avatar
+                                                    size={"5"}
+                                                    src={item.avatar}
+                                                    className=""
+                                                />
+                                            </button>
+                                        </HoverCard.Trigger>
+                                        <HoverCard.Content className="flex flex-col gap-5 px-5 py-3 w-60 backdrop-blur-lg bg-black/60">
+                                            <h3  className="text-xl font-black">{item.title}</h3>
+                                            <p className="text-sm">{item.description}</p>
+                                        </HoverCard.Content>
+                                    </HoverCard.Root>
                                 );
                             })}
                         </div>
