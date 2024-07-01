@@ -228,6 +228,7 @@ export default function SideBar() {
                         </Heading>
                         <div
                             id="notification-panel"
+                            tabIndex={4}
                             className="flex flex-wrap items-start justify-start h-full overflow-y-scroll gap-y-8 gap-x-4"
                         >
                             {items.map((item) => {
