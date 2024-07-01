@@ -31,12 +31,12 @@ const items = [
     },
     {
         avatar: "linux.png",
-        description: "Linux System Adminstration",
+        description: "Linux OS",
         title: "Linux",
     },
     {
         avatar: "discord.png",
-        description: "Community of Devlopers",
+        description: "Community of Developers",
         title: "Discord",
     },
     {
@@ -100,6 +100,16 @@ const items = [
         title: "React.js",
     },
     {
+        avatar: "https://reactrouter.com/favicon-dark.png",
+        description: "Single Page Applications And Routing",
+        title: "React Router",
+    },
+    {
+        avatar: "redux.png",
+        description: "State Management in React",
+        title: "Redux Toolkit",
+    },
+    {
         avatar: "node.png",
         description: "Backend Javascript Running Environment",
         title: "Node.js",
@@ -110,7 +120,7 @@ const items = [
         title: "Express.js",
     },
     {
-        avatar: "https://www.typescriptlang.org/icons/icon-512x512.png?v=8944a05a8b601855de116c8a56d3b3ae",
+        avatar: "ts.png",
         description: "Typescript Lang",
         title: "TypeScript",
     },
@@ -120,9 +130,19 @@ const items = [
         title: "GraphQL",
     },
     {
+        avatar: "https://www.apollographql.com/favicon/apple-icon-180x180.png",
+        description: "Apollo GraphQL Server",
+        title: "Apollo",
+    },
+    {
         avatar: "https://restfulapi.net/wp-content/uploads/cropped-rest-192x192.png",
-        description: "Rest API",
+        description: "Restful API",
         title: "RestAPI",
+    },
+    {
+        avatar: "babel.png",
+        description: "Javascript Transcompiler",
+        title: "Babel",
     },
     {
         avatar: "mongodb.png",
@@ -130,7 +150,7 @@ const items = [
         title: "MongoDB",
     },
     {
-        avatar: "https://mongoosejs.com/docs/images/favicon/apple-icon-180x180.png",
+        avatar: "mongoose.png",
         description: "Object Document Model",
         title: "Mongoose",
     },
@@ -155,9 +175,24 @@ const items = [
         title: "Node - Test",
     },
     {
-        avatar: "https://www.python.org/static/apple-touch-icon-144x144-precomposed.png",
+        avatar: "py.png",
         description: "Python Lang",
         title: "Python",
+    },
+    {
+        avatar: "postcss.png",
+        description: "CSS Compiler",
+        title: "PostCSS",
+    },
+    {
+        avatar: "tailwind.png",
+        description: "CSS Framework",
+        title: "TailwindCSS",
+    },
+    {
+        avatar: "eslint.png",
+        description: "Javascript Code Analysis",
+        title: "ESLint",
     },
 ];
 
@@ -222,14 +257,14 @@ export default function SideBar() {
                             </svg>
                         </button>
                     </Dialog.Trigger>
-                    <Dialog.Content className="w-[80dvh] h-[80dvh] outline-none bg-transparent backdrop-blur-md flex flex-col gap-10">
+                    <Dialog.Content className="w-[80dvh] h-[80dvh] outline-none bg-transparent backdrop-blur-md flex flex-col gap-5">
                         <Heading size={"8"} className="font-bold text-center">
                             Tools
                         </Heading>
                         <div
                             id="notification-panel"
                             tabIndex={4}
-                            className="flex flex-wrap items-start justify-start h-full overflow-y-scroll gap-y-8 gap-x-4"
+                            className="flex flex-wrap items-start justify-start h-full py-5 overflow-y-scroll gap-y-8 gap-x-4"
                         >
                             {items.map((item) => {
                                 return (
@@ -244,8 +279,12 @@ export default function SideBar() {
                                             </button>
                                         </HoverCard.Trigger>
                                         <HoverCard.Content className="flex flex-col gap-5 px-5 py-3 w-60 backdrop-blur-lg bg-black/60">
-                                            <h3  className="text-xl font-black">{item.title}</h3>
-                                            <p className="text-sm">{item.description}</p>
+                                            <h3 className="text-xl font-black">
+                                                {item.title}
+                                            </h3>
+                                            <p className="text-sm">
+                                                {item.description}
+                                            </p>
                                         </HoverCard.Content>
                                     </HoverCard.Root>
                                 );
