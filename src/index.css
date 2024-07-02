@@ -30,3 +30,7 @@
 #notification-panel {
   box-shadow: inset 0 -1rem 1rem -1rem #11111166;
 }
+
+button.paint {
+  background: orange;
+}

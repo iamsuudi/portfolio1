@@ -10,7 +10,7 @@ import {
 
 const items = [
     {
-        avatar: "https://code.visualstudio.com/favicon.ico",
+        avatar: "vscode.png",
         title: "Visual Studio Code",
         description: "Code Editor",
     },
@@ -55,7 +55,7 @@ const items = [
         title: "Vite",
     },
     {
-        avatar: "https://webpack.js.org/icon_512x512.png",
+        avatar: "webpack.png",
         description: "Bundling Tool",
         title: "Webpack",
     },
@@ -70,7 +70,7 @@ const items = [
         title: "Figma",
     },
     {
-        avatar: "https://mui.com/static/icons/180x180.png",
+        avatar: "mui.png",
         description: "Component UI",
         title: "Material UI",
     },
@@ -155,7 +155,7 @@ const items = [
         title: "Mongoose",
     },
     {
-        avatar: "https://jestjs.io/img/jest.png",
+        avatar: "jest.png",
         description: "Testing Framework",
         title: "Jest",
     },
@@ -210,7 +210,7 @@ export default function SideBar() {
                     <Tooltip content="Visual Studio Code" className="">
                         <Avatar
                             size={3}
-                            src="https://code.visualstudio.com/favicon.ico"
+                            src="vscode.png"
                             className=""
                         />
                     </Tooltip>
