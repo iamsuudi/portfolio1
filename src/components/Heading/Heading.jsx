@@ -41,7 +41,7 @@ export default function HeaderBar() {
 							<DateFormatted />
 						</button>
 					</DropdownMenu.Trigger>
-					<DropdownMenu.Content className="fixed -right-[28dvw] p-1 bg-black/80 backdrop-blur-lg">
+					<DropdownMenu.Content className="fixed -right-[25dvw] p-1 bg-black/80 backdrop-blur-lg">
 						<div className="h-[26rem] w-[50rem] flex gap-3">
 							<NotificationPanel />
 							<Separator size={"4"} orientation={"vertical"} />

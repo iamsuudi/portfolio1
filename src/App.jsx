@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import Window from "./components/window/Window";
+import Window from "./components/Window";
 import { useState } from "react";
 import { Avatar } from "@radix-ui/themes";
 
@@ -38,7 +38,7 @@ function LoadingScreen() {
 
 function App() {
 	const [viewPortIsLarge, setViewPortIsLarge] = useState(true);
-	const [isLoading, setIsLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(false);
 
 	useEffect(() => {
 		const checkViewPortSize = () => {
