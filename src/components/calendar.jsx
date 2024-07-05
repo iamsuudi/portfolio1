@@ -7,7 +7,7 @@ import {
 	subMonths,
 } from "date-fns";
 import {
-    CalendarIcon,
+	CalendarIcon,
 	CaretLeftIcon,
 	CaretRightIcon,
 } from "@radix-ui/react-icons";
@@ -54,7 +54,17 @@ function Calendar() {
 		<>
 			<div className="p-5 text-white/60">
 				<div className="text-sm">{format(new Date(), "eeee")}</div>
-				<div className="flex items-center gap-3 text-3xl">{format(new Date(), "LLLL d y")} <CalendarIcon className="size-7"/></div>
+				<button
+					onClick={() => {
+						setDate(new Date());
+						setFirstDay(startOfMonth(new Date()));
+						setLastDay(endOfMonth(new Date()));
+					}}
+					className="flex items-center gap-3 text-3xl"
+				>
+					{format(new Date(), "LLLL d y")}{" "}
+					<CalendarIcon className="size-7" />
+				</button>
 			</div>
 			<div className="flex flex-col gap-4 px-4 py-2">
 				<div className="flex justify-between px-1">
