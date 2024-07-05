@@ -51,7 +51,7 @@ function Calendar() {
 	};
 
 	return (
-		<>
+		<div className="flex flex-col w-2/5 h-full">
 			<div className="p-5 text-white/60">
 				<div className="text-sm">{format(new Date(), "eeee")}</div>
 				<button
@@ -119,7 +119,7 @@ function Calendar() {
 					{days}
 				</div>
 			</div>
-		</>
+		</div>
 	);
 }
 

@@ -1,5 +1,5 @@
-import HeaderBar from "./Heading";
-import SideBar from "./SideBar";
+import HeaderBar from "./Heading/Heading";
+import SideBar from "./Heading/SideBar";
 
 /* eslint react/prop-types: 0 */
 export default function Window({ children }) {
