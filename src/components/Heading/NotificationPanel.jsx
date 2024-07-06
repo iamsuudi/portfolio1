@@ -57,10 +57,10 @@ function NotificationPanel() {
 	]);
 
 	return (
-		<div className="flex flex-col items-center justify-between w-3/5 h-full gap-3">
+		<div className="flex flex-col items-center justify-between w-full h-full gap-3">
 			<div
 				id="notification-panel"
-				className="w-full h-full overflow-x-hidden overflow-y-scroll"
+				className="w-full h-[24rem] overflow-x-hidden overflow-y-scroll"
 			>
 				{notifications.length > 0 ? (
 					notifications.map((notification) => {

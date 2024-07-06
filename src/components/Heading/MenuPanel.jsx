@@ -31,7 +31,6 @@ function MenuButton({ children }) {
 function MenuPanel() {
 	return (
 		<div
-			id="notification-panel"
 			className="flex flex-col p-3 overflow-x-hidden overflow-y-scroll w-96 h-80"
 		>
 			<div className="flex items-center justify-between">
