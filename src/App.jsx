@@ -38,14 +38,14 @@ function LoadingScreen() {
 
 function App() {
 	const [viewPortIsLarge, setViewPortIsLarge] = useState(true);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		const checkViewPortSize = () => {
 			const width = window.innerWidth;
 			const height = window.innerHeight;
 
-			if (width > 1300 && height > 900) setViewPortIsLarge(true);
+			if (width > 850 && height > 600) setViewPortIsLarge(true);
 			else setViewPortIsLarge(false);
 		};
 
