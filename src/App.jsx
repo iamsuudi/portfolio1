@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Window from "./components/Window";
 import { useState } from "react";
-import { Avatar } from "@radix-ui/themes";
+import { Avatar, Progress } from "@radix-ui/themes";
 
 function UnSupportedDevice() {
 	return (
@@ -20,18 +20,28 @@ function UnSupportedDevice() {
 
 function LoadingScreen() {
 	return (
-		<div className="w-[100dvw] h-[100dvh] flex justify-center items-center gap-10 flex-col p-5">
-			<Avatar
-				src="ubuntu.png"
-				fallback="Ubuntu Logo"
-				size={"9"}
-				className=""
-			/>
-			<span
-				className={`text-xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-gray-700 via-gray-50 to-gray-700 bg-300% animate-gradient`}
-			>
-				Loading Ubuntu...
-			</span>
+		<div className="w-[100dvw] h-[100dvh] flex justify-center items-center p-5">
+			<div className="flex flex-col gap-5">
+				<Avatar
+					src="ubuntu.png"
+					fallback="Ubuntu Logo"
+					size={"9"}
+					className=""
+				/>
+				<Progress
+					duration="10s"
+					color="orange"
+					size={"2"}
+					radius="full"
+					variant="soft"
+					className=""
+				/>
+				<span
+					className={`text-xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-gray-700 via-gray-50 to-gray-700 bg-300% animate-gradient`}
+				>
+					Loading Ubuntu...
+				</span>
+			</div>
 		</div>
 	);
 }
@@ -51,7 +61,7 @@ function App() {
 
 		const timer = setTimeout(() => {
 			setIsLoading(false);
-		}, 5000);
+		}, 10000);
 
 		checkViewPortSize();
 

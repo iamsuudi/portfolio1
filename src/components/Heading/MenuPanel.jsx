@@ -30,9 +30,7 @@ function MenuButton({ children }) {
 
 function MenuPanel() {
 	return (
-		<div
-			className="flex flex-col p-3 overflow-x-hidden overflow-y-scroll w-96 h-80"
-		>
+		<div className="flex flex-col p-3 overflow-hidden w-[25rem] h-[22rem]">
 			<div className="flex items-center justify-between">
 				<button className="flex items-center gap-2 px-4 py-2 text-sm rounded-full bg-white/15">
 					<svg
