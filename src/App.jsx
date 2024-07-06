@@ -45,7 +45,7 @@ function App() {
 			const width = window.innerWidth;
 			const height = window.innerHeight;
 
-			if (width > 850 && height > 600) setViewPortIsLarge(true);
+			if (width > 850 && height > 500) setViewPortIsLarge(true);
 			else setViewPortIsLarge(false);
 		};
 
