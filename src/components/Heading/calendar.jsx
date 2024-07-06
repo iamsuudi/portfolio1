@@ -1,9 +1,11 @@
 import {
+	addDays,
 	addMonths,
 	endOfMonth,
 	format,
 	isSameDay,
 	startOfMonth,
+	subDays,
 	subMonths,
 } from "date-fns";
 import {
@@ -19,24 +21,31 @@ function Calendar() {
 	const [lastDay, setLastDay] = useState(endOfMonth(date));
 	const [days, setDays] = useState([]);
 
+	/* eslint react-hooks/exhaustive-deps: 0 */
 	useEffect(() => {
 		const collection = [];
 		// if (firstDay.getDay())
-		for (let i = 0; i < firstDay.getDay(); i += 1) {
-			collection.push(<span className="w-7 h-7"></span>);
+		for (let i = firstDay.getDay(); i > 0; i -= 1) {
+			collection.push(
+				<span
+					key={format(subDays(new Date(firstDay), i), "dd-LL-y")}
+					className="w-7 h-7"
+				></span>
+			);
 		}
 
 		for (let i = 1; i <= lastDay.getDate(); i += 1) {
 			collection.push(
 				<Button
 					day={i}
+					key={format(addDays(new Date(firstDay), i - 1), "dd-LL-y")}
 					today={i === date.getDate() && isSameDay(date, new Date())}
 				/>
 			);
 		}
 
 		setDays(collection);
-	}, [lastDay, days, date, firstDay]);
+	}, [lastDay, firstDay]);
 
 	const Button = ({ day, today }) => {
 		return (
@@ -51,7 +60,7 @@ function Calendar() {
 	};
 
 	return (
-		<div className="flex flex-col w-2/5 h-full">
+		<div className="flex flex-col h-full w-[35rem]">
 			<div className="p-5 text-white/60">
 				<div className="text-sm">{format(new Date(), "eeee")}</div>
 				<button
