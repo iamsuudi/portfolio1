@@ -219,7 +219,7 @@ export default function SideBar() {
                 
 				<button className="flex p-3 pt-5 rounded-xl hover:bg-white/10">
 					<Tooltip content="Directory">
-						<Avatar size={3} src="directory.png" className="animate-bounce" />
+						<Avatar size={3} src="folder.png" className="animate-bounce" />
 					</Tooltip>
 				</button>
 
