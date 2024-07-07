@@ -10,11 +10,10 @@ function ViewPort() {
 	useEffect(() => {}, [display]);
 
 	return (
-		<div className="relative border viewport">
+		<div className="relative viewport">
 			{display.map((app) => {
 				return <Fragment key={app.name}>{app.component}</Fragment>;
 			})}
-			<div className="bg-white h-60 w-60"></div>
 		</div>
 	);
 }

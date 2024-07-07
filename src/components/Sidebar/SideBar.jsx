@@ -9,7 +9,8 @@ import {
 } from "@radix-ui/themes";
 import { useContext } from "react";
 import { AppContext } from "../Window";
-import { RootFolder } from "../FileManager/RootFolder";
+import { RootFolder } from "../ViewPort/FileManager/RootFolder";
+import VSCodeRoot from "../ViewPort/VSCode/VSCodeRoot";
 
 const items = [
 	{
@@ -224,14 +225,17 @@ export default function SideBar() {
 				<button
 					className="flex p-3 rounded-xl hover:bg-white/10"
 					onClick={() => {
-						if (!display.find((app) => app.name === "FileManager"))
+						if (
+							!display.find((app) => app.name === "FileManager")
+						) {
 							setDisplay(
 								display.concat({
 									name: "FileManager",
 									component: <RootFolder />,
 								})
 							);
-						else {
+							setLayer(layer.concat("FileManager"));
+						} else {
 							const previousIndex = layer.indexOf("FileManager");
 							setLayer([
 								...layer.slice(0, previousIndex),
@@ -244,7 +248,29 @@ export default function SideBar() {
 						<Avatar size={3} src="folder.png" className="" />
 					</Tooltip>
 				</button>
-				<button className="flex p-3 rounded-xl hover:bg-white/10">
+
+				<button
+					className="flex p-3 rounded-xl hover:bg-white/10"
+					onClick={() => {
+						if (
+							!display.find((app) => app.name === "VSCode")
+						) {
+							setDisplay(
+								display.concat({
+									name: "VSCode",
+									component: <VSCodeRoot />,
+								})
+							);
+							setLayer(layer.concat("VSCode"));
+						} else {
+							const previousIndex = layer.indexOf("VSCode");
+							setLayer([
+								...layer.slice(0, previousIndex),
+								...layer.slice(previousIndex + 1),
+								"VSCode",
+							]);
+						}
+					}}>
 					<Tooltip content="Visual Studio Code" className="">
 						<Avatar size={3} src="vscode.png" className="" />
 					</Tooltip>

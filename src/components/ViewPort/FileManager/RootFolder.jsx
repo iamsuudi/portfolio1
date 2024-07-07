@@ -21,7 +21,7 @@ import FolderNavBar from "./NavBar";
 import FolderSideBar from "./SideBar";
 import ChildFolders from "./Children";
 import { useContext } from "react";
-import { AppContext } from "../Window";
+import { AppContext } from "../../Window";
 
 export const PathContext = createContext();
 
@@ -209,8 +209,9 @@ export function RootFolder() {
 					maxWidth: "100%",
 					maxHeight: "100%",
 					position: "absolute",
+					zIndex: layer.indexOf("FileManager"),
 				}}
-				className={`flex bg-black/60 backdrop-blur-sm border`}>
+				className={`flex bg-black/60 backdrop-blur-sm rounded-xl`}>
 				<div className="flex flex-col gap-8 p-4 text-sm w-60">
 					<div className="flex items-center justify-between w-full ">
 						<button className="flex items-center justify-center w-6 h-6 rounded-md hover:bg-white/15">
@@ -264,16 +265,35 @@ export function RootFolder() {
 						<div className="flex items-center gap-3 ml-auto">
 							<button
 								className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 hover:bg-white/25"
-								onClick={() =>
-									setSize({ width: "60rem", height: "40rem" })
-								}>
+								onClick={() => {
+									const previousIndex =
+										layer.indexOf("FileManager");
+									setLayer([
+										"FileManager",
+										...layer.slice(0, previousIndex),
+										...layer.slice(previousIndex + 1),
+									]);
+								}}>
 								<MinusIcon className="size-[10px] stroke-white" />
 							</button>
 							<button
 								className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 hover:bg-white/25"
-								onClick={() =>
-									setSize({ width: "100%", height: "100%" })
-								}>
+								onClick={() => {
+									const { width, height } = size;
+									if (width === height && height === "100%") {
+										console.log("reset size");
+										setSize({
+											width: "60rem",
+											height: "40rem",
+										});
+									} else {
+										console.log("maximize size");
+										setSize({
+											width: "100%",
+											height: "100%",
+										});
+									}
+								}}>
 								<StopIcon className="size-[10px] stroke-white" />
 							</button>
 							<button
