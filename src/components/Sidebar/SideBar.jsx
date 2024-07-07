@@ -222,7 +222,6 @@ export default function SideBar() {
 						<Avatar size={3} src="folder.png" className="animate-bounce" />
 					</Tooltip>
 				</button>
-
 				<button className="flex p-3 rounded-xl hover:bg-white/10">
 					<Tooltip content="Visual Studio Code" className="">
 						<Avatar size={3} src="vscode.png" className="" />

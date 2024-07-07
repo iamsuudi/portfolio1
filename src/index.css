@@ -23,11 +23,13 @@
 	background-attachment: fixed;
 }
 
-#notification-panel::-webkit-scrollbar {
+#notification-panel::-webkit-scrollbar,
+#directories::-webkit-scrollbar {
 	display: none;
 }
 
-#notification-panel {
+#notification-panel,
+#directories {
 	-ms-overflow-style: none;
 	scrollbar-width: none;
 }
