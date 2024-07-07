@@ -27,7 +27,7 @@ function DateFormatted() {
 
 export default function HeaderBar() {
 	return (
-		<div className="flex items-center justify-between w-full backdrop-blur-lg bg-black/30">
+		<div className="flex items-center justify-between w-[100dvw] h-8 backdrop-blur-lg bg-black/30">
 			<div className="flex items-center h-full px-8 rounded-2xl hover:bg-white/10">
 				<button className="">
 					<DashboardIcon />

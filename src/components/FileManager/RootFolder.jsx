@@ -20,6 +20,8 @@ import { Separator } from "@radix-ui/themes";
 import FolderNavBar from "./NavBar";
 import FolderSideBar from "./SideBar";
 import ChildFolders from "./Children";
+import { useContext } from "react";
+import { AppContext } from "../Window";
 
 export const PathContext = createContext();
 
@@ -28,6 +30,9 @@ export function RootFolder() {
 	const [pointer, setPointer] = useState(0);
 	const [path, setPath] = useState(history[0]);
 	const [children, setChildren] = useState([]);
+
+	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
+	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
 
 	const dirs = useMemo(
 		() => [
@@ -197,7 +202,15 @@ export function RootFolder() {
 
 	return (
 		<PathContext.Provider value={value}>
-			<div className="flex w-full h-[500px] bg-black/60 backdrop-blur-sm">
+			<div
+				style={{
+					width: size.width,
+					height: size.height,
+					maxWidth: "100%",
+					maxHeight: "100%",
+					position: "absolute",
+				}}
+				className={`flex bg-black/60 backdrop-blur-sm border`}>
 				<div className="flex flex-col gap-8 p-4 text-sm w-60">
 					<div className="flex items-center justify-between w-full ">
 						<button className="flex items-center justify-center w-6 h-6 rounded-md hover:bg-white/15">
@@ -216,6 +229,7 @@ export function RootFolder() {
 
 				<div className="flex flex-col w-full gap-10 px-4 py-3 text-sm">
 					<div className="flex w-full gap-5">
+						{/* Navigation */}
 						<div className="flex gap-2">
 							<button
 								className={`p-2 rounded-md ${
@@ -226,8 +240,7 @@ export function RootFolder() {
 									console.log("back");
 									setPath(history[pointer - 1]);
 									setPointer(pointer - 1);
-								}}
-							>
+								}}>
 								<ChevronLeftIcon />
 							</button>
 							<button
@@ -240,22 +253,39 @@ export function RootFolder() {
 									console.log("forward");
 									setPath(history[pointer + 1]);
 									setPointer(pointer + 1);
-								}}
-							>
+								}}>
 								<ChevronRightIcon />
 							</button>
 						</div>
 
 						<FolderNavBar />
 
+						{/* Resizing / Closing */}
 						<div className="flex items-center gap-3 ml-auto">
-							<button className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 hover:bg-white/25">
+							<button
+								className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 hover:bg-white/25"
+								onClick={() =>
+									setSize({ width: "60rem", height: "40rem" })
+								}>
 								<MinusIcon className="size-[10px] stroke-white" />
 							</button>
-							<button className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 hover:bg-white/25">
+							<button
+								className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 hover:bg-white/25"
+								onClick={() =>
+									setSize({ width: "100%", height: "100%" })
+								}>
 								<StopIcon className="size-[10px] stroke-white" />
 							</button>
-							<button className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 hover:bg-white/25">
+							<button
+								className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 hover:bg-white/25"
+								onClick={() => {
+									setDisplay(
+										display.filter(
+											(app) => app.name !== "FileManager"
+										)
+									);
+									setLayer(layer.slice(0, layer.length - 1));
+								}}>
 								<Cross1Icon className="size-[10px] stroke-white" />
 							</button>
 						</div>

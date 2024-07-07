@@ -37,8 +37,7 @@ function LoadingScreen() {
 					className=""
 				/>
 				<span
-					className={`text-xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-gray-700 via-gray-50 to-gray-700 bg-300% animate-gradient`}
-				>
+					className={`text-xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-gray-700 via-gray-50 to-gray-700 bg-300% animate-gradient`}>
 					Loading Ubuntu...
 				</span>
 			</div>
@@ -75,7 +74,7 @@ function App() {
 
 	if (isLoading) return <LoadingScreen />;
 
-	if (viewPortIsLarge) return <Window>{/* <h1>heading</h1> */}</Window>;
+	if (viewPortIsLarge) return <Window />;
 
 	return <UnSupportedDevice />;
 }

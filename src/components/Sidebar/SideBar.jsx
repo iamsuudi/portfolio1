@@ -7,6 +7,9 @@ import {
 	Separator,
 	Tooltip,
 } from "@radix-ui/themes";
+import { useContext } from "react";
+import { AppContext } from "../Window";
+import { RootFolder } from "../FileManager/RootFolder";
 
 const items = [
 	{
@@ -213,13 +216,32 @@ function ToolButton({ item }) {
 }
 
 export default function SideBar() {
+	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
+
 	return (
-		<div className="flex flex-col justify-center h-full ml-auto w-fit">
-			<Box className="flex flex-col items-center w-full pt-4 rounded-2xl h-fit backdrop-blur-md bg-black/40 max-w-96">
-                
-				<button className="flex p-3 pt-5 rounded-xl hover:bg-white/10">
-					<Tooltip content="Directory">
-						<Avatar size={3} src="folder.png" className="animate-bounce" />
+		<div className="flex flex-col justify-center h-full ml-auto w-[70px]">
+			<Box className="flex flex-col items-center w-full py-4 rounded-2xl h-fit backdrop-blur-md bg-black/40 max-w-96">
+				<button
+					className="flex p-3 rounded-xl hover:bg-white/10"
+					onClick={() => {
+						if (!display.find((app) => app.name === "FileManager"))
+							setDisplay(
+								display.concat({
+									name: "FileManager",
+									component: <RootFolder />,
+								})
+							);
+						else {
+							const previousIndex = layer.indexOf("FileManager");
+							setLayer([
+								...layer.slice(0, previousIndex),
+								...layer.slice(previousIndex + 1),
+								"FileManager",
+							]);
+						}
+					}}>
+					<Tooltip content="Directories">
+						<Avatar size={3} src="folder.png" className="" />
 					</Tooltip>
 				</button>
 				<button className="flex p-3 rounded-xl hover:bg-white/10">
@@ -257,14 +279,14 @@ export default function SideBar() {
 				</button>
 
 				<Dialog.Root>
+					<Dialog.Title hidden>Tools</Dialog.Title>
 					<Dialog.Trigger>
 						<button className="flex justify-center w-full p-3 rounded-xl hover:bg-white/10">
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								fill="currentColor"
 								className="size-8"
-								viewBox="0 0 16 16"
-							>
+								viewBox="0 0 16 16">
 								<path d="M2.273 9.53a2.273 2.273 0 1 0 0-4.546 2.273 2.273 0 0 0 0 4.547Zm9.467-4.984a2.273 2.273 0 1 0 0-4.546 2.273 2.273 0 0 0 0 4.546M7.4 13.108a5.54 5.54 0 0 1-3.775-2.88 3.27 3.27 0 0 1-1.944.24 7.4 7.4 0 0 0 5.328 4.465c.53.113 1.072.169 1.614.166a3.25 3.25 0 0 1-.666-1.9 6 6 0 0 1-.557-.091m3.828 2.285a2.273 2.273 0 1 0 0-4.546 2.273 2.273 0 0 0 0 4.546m3.163-3.108a7.44 7.44 0 0 0 .373-8.726 3.3 3.3 0 0 1-1.278 1.498 5.57 5.57 0 0 1-.183 5.535 3.26 3.26 0 0 1 1.088 1.693M2.098 3.998a3.3 3.3 0 0 1 1.897.486 5.54 5.54 0 0 1 4.464-2.388c.037-.67.277-1.313.69-1.843a7.47 7.47 0 0 0-7.051 3.745" />
 							</svg>
 						</button>
@@ -276,8 +298,7 @@ export default function SideBar() {
 						<div
 							id="notification-panel"
 							tabIndex={4}
-							className="flex flex-wrap items-start justify-start h-full py-5 overflow-y-scroll gap-y-8 gap-x-4"
-						>
+							className="flex flex-wrap items-start justify-start h-full py-5 overflow-y-scroll gap-y-8 gap-x-4">
 							{items.map((item) => {
 								return (
 									<ToolButton key={item.avatar} item={item} />
