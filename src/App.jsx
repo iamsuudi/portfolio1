@@ -47,7 +47,7 @@ function LoadingScreen() {
 
 function App() {
 	const [viewPortIsLarge, setViewPortIsLarge] = useState(true);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		const checkViewPortSize = () => {
