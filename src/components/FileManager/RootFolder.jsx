@@ -24,7 +24,9 @@ import ChildFolders from "./Children";
 export const PathContext = createContext();
 
 export function RootFolder() {
-	const [path, setPath] = useState(["Home"]);
+	const [history, setHistory] = useState([["Home"]]);
+	const [pointer, setPointer] = useState(0);
+	const [path, setPath] = useState(history[0]);
 	const [children, setChildren] = useState([]);
 
 	const dirs = useMemo(
@@ -152,8 +154,19 @@ export function RootFolder() {
 		setChildren(result);
 	}, [path, dirs]);
 
+	const value = {
+		path,
+		setPath,
+		dirs,
+		children,
+		history,
+		setHistory,
+		pointer,
+		setPointer,
+	};
+
 	return (
-		<PathContext.Provider value={{ path, setPath, dirs, children }}>
+		<PathContext.Provider value={value}>
 			<div className="flex w-full h-[500px] bg-black/60 backdrop-blur-sm">
 				<div className="flex flex-col gap-8 p-4 text-sm w-60">
 					<div className="flex items-center justify-between w-full ">
@@ -174,10 +187,31 @@ export function RootFolder() {
 				<div className="flex flex-col w-full gap-10 px-4 py-3 text-sm">
 					<div className="flex w-full gap-5">
 						<div className="flex gap-2">
-							<button className="p-2 rounded-md hover:bg-white/15">
+							<button
+								className={`p-2 rounded-md ${
+									pointer > 0 && "hover:bg-white/15"
+								}`}
+								disabled={pointer === 0}
+								onClick={() => {
+									console.log("back");
+									setPath(history[pointer - 1]);
+									setPointer(pointer - 1);
+								}}
+							>
 								<ChevronLeftIcon />
 							</button>
-							<button className="p-2 rounded-md hover:bg-white/15">
+							<button
+								className={`p-2 rounded-md ${
+									pointer + 1 < history.length &&
+									"hover:bg-white/15"
+								}`}
+								disabled={pointer + 1 === history.length}
+								onClick={() => {
+									console.log("forward");
+									setPath(history[pointer + 1]);
+									setPointer(pointer + 1);
+								}}
+							>
 								<ChevronRightIcon />
 							</button>
 						</div>
