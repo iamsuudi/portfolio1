@@ -149,10 +149,40 @@ export function RootFolder() {
 			return pathResolver(paths.slice(1), childDirs);
 		}
 
-		const result = pathResolver(path, dirs);
+		function recentResolver() {
+			const recentFolders = [];
+
+			const resolver = (paths, directories) => {
+				const currentDir = directories.find((d) => d.name === paths[0]);
+
+				if (paths.length === 1) return currentDir;
+
+				return resolver(paths.slice(1), currentDir.children);
+			};
+
+			for (let path of history) {
+				const folder = resolver(path, dirs);
+				const previousIndex = recentFolders.indexOf(folder);
+
+				if (previousIndex !== -1) {
+					recentFolders.splice(previousIndex, 1);
+				}
+
+				if (!["Recent", "Home"].includes(folder.name))
+					recentFolders.push(folder);
+			}
+
+			return recentFolders.reverse();
+		}
+
+		const isRecentDir = path[path.length - 1] === "Recent";
+
+		const result = isRecentDir
+			? recentResolver()
+			: pathResolver(path, dirs);
 
 		setChildren(result);
-	}, [path, dirs]);
+	}, [path, dirs, history]);
 
 	const value = {
 		path,

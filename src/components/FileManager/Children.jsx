@@ -32,10 +32,10 @@ export default function ChildFolders() {
 			className="flex flex-col w-full h-full gap-1 overflow-y-scroll"
 		>
 			{children.length > 0 &&
-				children.map((dir) => {
+				children.map((dir, index) => {
 					return (
 						<Folder
-							key={dir.path.toString()}
+							key={dir.path.toString().concat(index)}
 							dir={dir}
 							setPath={setPath}
 						/>
