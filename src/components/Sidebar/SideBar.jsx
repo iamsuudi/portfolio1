@@ -231,7 +231,7 @@ export default function SideBar() {
 							setDisplay(
 								display.concat({
 									name: "FileManager",
-									component: <RootFolder />,
+									component: RootFolder,
 								})
 							);
 							setLayer(layer.concat("FileManager"));
@@ -252,13 +252,11 @@ export default function SideBar() {
 				<button
 					className="flex p-3 rounded-xl hover:bg-white/10"
 					onClick={() => {
-						if (
-							!display.find((app) => app.name === "VSCode")
-						) {
+						if (!display.find((app) => app.name === "VSCode")) {
 							setDisplay(
 								display.concat({
 									name: "VSCode",
-									component: <VSCodeRoot />,
+									component: VSCodeRoot,
 								})
 							);
 							setLayer(layer.concat("VSCode"));

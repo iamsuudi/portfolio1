@@ -7,7 +7,7 @@ export default function FolderSideBar() {
 	const { dirs } = useContext(PathContext);
 
 	return (
-		<div className="flex flex-col gap-2">
+		<div className="flex flex-col gap-2 p-4">
 			{dirs.map((dir) => {
 				if (dir.name === "Projects") {
 					return (

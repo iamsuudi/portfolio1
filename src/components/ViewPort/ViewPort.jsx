@@ -1,19 +1,41 @@
-import { createContext, Fragment, useContext, useEffect } from "react";
+import { createContext, Fragment, useContext, useRef } from "react";
 
 import { AppContext } from "../Window";
 
-export const LayerContext = createContext();
+import {
+	handleDrag,
+	startDragging,
+	stopDragging,
+} from "../../utils/dragHelpers";
+
+export const DragContext = createContext();
 
 function ViewPort() {
 	const { display } = useContext(AppContext);
+	const containerRef = useRef(null);
 
-	useEffect(() => {}, [display]);
+	const drag = (e, dragRef, position, setPosition) => {
+		startDragging(
+			e,
+			dragRef,
+			position,
+			setPosition,
+			containerRef,
+			stopDragging,
+			handleDrag
+		);
+	};
 
 	return (
-		<div className="relative viewport">
-			{display.map((app) => {
-				return <Fragment key={app.name}>{app.component}</Fragment>;
+		<div ref={containerRef} className="relative border viewport">
+			{display.map((App) => {
+				return (
+					<Fragment key={App.name}>
+						<App.component drag={drag} />
+					</Fragment>
+				);
 			})}
+			{/* <DraggableComponent drag={drag} /> */}
 		</div>
 	);
 }

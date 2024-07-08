@@ -1,6 +1,5 @@
 import { Avatar, Separator } from "@radix-ui/themes";
-import { useContext } from "react";
-import { useState } from "react";
+import { useContext, useState, useRef } from "react";
 import { AppContext } from "../../Window";
 import {
 	BellIcon,
@@ -25,9 +24,11 @@ import {
 	StopIcon,
 } from "@radix-ui/react-icons";
 
-export default function VSCodeRoot() {
+export default function VSCodeRoot({ drag }) {
 	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
 	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
+	const [position, setPosition] = useState({ top: 0, left: 0 });
+	const dragRef = useRef(null);
 
 	return (
 		<div
@@ -37,10 +38,16 @@ export default function VSCodeRoot() {
 				maxWidth: "100%",
 				maxHeight: "100%",
 				position: "absolute",
+				top: position.top,
+				left: position.left,
 				zIndex: layer.indexOf("VSCode"),
 			}}
 			className={`flex flex-col bg-black/60 backdrop-blur-md rounded-t-xl text-sm`}>
-			<header className="flex items-center w-full p-2 h-fit backdrop-blur-sm">
+			<header
+				onMouseDown={(e) => {
+					drag(e, dragRef, position, setPosition);
+				}}
+				className="flex items-center w-full p-2 h-fit backdrop-blur-sm hover:border-red-300 hover:cursor-grabbing">
 				<Avatar src="vscode.png" className="size-5" />
 
 				<p className="ml-auto font-bold">Visual Studio Code</p>
@@ -75,6 +82,7 @@ export default function VSCodeRoot() {
 									width: "100%",
 									height: "100%",
 								});
+								setPosition({ top: 0, left: 0 });
 							}
 						}}>
 						<StopIcon className="size-[10px] stroke-white" />

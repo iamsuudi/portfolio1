@@ -29,7 +29,7 @@ export default function ChildFolders() {
 	return (
 		<div
 			id="directories"
-			className="flex flex-col w-full h-full gap-1 overflow-y-scroll"
+			className="flex flex-col w-full h-full gap-1 px-4 pb-3 overflow-y-scroll"
 		>
 			{children.length > 0 &&
 				children.map((dir, index) => {

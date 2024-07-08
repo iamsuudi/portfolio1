@@ -20,12 +20,12 @@ import { Separator } from "@radix-ui/themes";
 import FolderNavBar from "./NavBar";
 import FolderSideBar from "./SideBar";
 import ChildFolders from "./Children";
-import { useContext } from "react";
+import { useContext, useRef } from "react";
 import { AppContext } from "../../Window";
 
 export const PathContext = createContext();
 
-export function RootFolder() {
+export function RootFolder({ drag }) {
 	const [history, setHistory] = useState([["Home"]]);
 	const [pointer, setPointer] = useState(0);
 	const [path, setPath] = useState(history[0]);
@@ -33,6 +33,9 @@ export function RootFolder() {
 
 	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
 	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
+
+	const [position, setPosition] = useState({ top: 0, left: 0 });
+	const dragRef = useRef(null);
 
 	const dirs = useMemo(
 		() => [
@@ -209,11 +212,18 @@ export function RootFolder() {
 					maxWidth: "100%",
 					maxHeight: "100%",
 					position: "absolute",
+					top: position.top,
+					left: position.left,
 					zIndex: layer.indexOf("FileManager"),
 				}}
 				className={`flex bg-black/60 backdrop-blur-sm rounded-xl`}>
-				<div className="flex flex-col gap-8 p-4 text-sm w-60">
-					<div className="flex items-center justify-between w-full ">
+				<div className="flex flex-col text-sm w-60">
+					<div
+						className="flex items-center justify-between w-full p-4 hover:cursor-grabbing hover:bg-black/30"
+						onMouseDown={(e) => {
+							console.log("dragging");
+							drag(e, dragRef, position, setPosition);
+						}}>
 						<button className="flex items-center justify-center w-6 h-6 rounded-md hover:bg-white/15">
 							<MagnifyingGlassIcon className="size-5" />
 						</button>
@@ -228,8 +238,12 @@ export function RootFolder() {
 
 				<Separator size={"4"} color="gray" orientation={"vertical"} />
 
-				<div className="flex flex-col w-full gap-10 px-4 py-3 text-sm">
-					<div className="flex w-full gap-5">
+				<div className="flex flex-col w-full gap-5 text-sm">
+					<div
+						className="flex w-full gap-5 px-4 py-3 hover:cursor-grabbing hover:bg-black/30"
+						onMouseDown={(e) => {
+							drag(e, dragRef, position, setPosition);
+						}}>
 						{/* Navigation */}
 						<div className="flex gap-2">
 							<button
@@ -292,6 +306,7 @@ export function RootFolder() {
 											width: "100%",
 											height: "100%",
 										});
+										setPosition({ top: 0, left: 0 });
 									}
 								}}>
 								<StopIcon className="size-[10px] stroke-white" />

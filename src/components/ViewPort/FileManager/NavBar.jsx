@@ -11,7 +11,7 @@ export default function FolderNavBar() {
 		useContext(PathContext);
 
 	return (
-		<div className="flex items-center w-full gap-3 px-4 py-1 bg-white/15 max-w-[50rem] rounded-lg">
+		<div className="flex items-center w-full gap-3 px-4 py-1 bg-white/15 max-w-[30rem] rounded-lg">
 			<DesktopIcon className="" />
 			<div className="flex items-center gap-1 font-bold">
 				{path.map((p, i) => {
