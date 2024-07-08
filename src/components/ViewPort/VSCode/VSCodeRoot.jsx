@@ -42,7 +42,16 @@ export default function VSCodeRoot({ drag }) {
 				left: position.left,
 				zIndex: layer.indexOf("VSCode"),
 			}}
-			className={`flex flex-col bg-black/60 backdrop-blur-md rounded-t-xl text-sm`}>
+			className={`flex flex-col bg-black/60 backdrop-blur-md rounded-t-xl text-sm`}
+			onClick={() => {
+				const previousIndex = layer.indexOf("VSCode");
+				if (previousIndex + 1 !== layer.length)
+					setLayer([
+						...layer.slice(0, previousIndex),
+						...layer.slice(previousIndex + 1),
+						"VSCode",
+					]);
+			}}>
 			<header
 				onMouseDown={(e) => {
 					drag(e, dragRef, position, setPosition);
@@ -99,9 +108,7 @@ export default function VSCodeRoot({ drag }) {
 					</button>
 				</div>
 			</header>
-
 			{/* <Separator orientation={"horizontal"} size={"4"} /> */}
-
 			<aside className="flex w-full gap-3 px-2 py-1">
 				<span className="hover:cursor-pointer text-white/80 hover:text-white">
 					File
@@ -128,9 +135,7 @@ export default function VSCodeRoot({ drag }) {
 					Help
 				</span>
 			</aside>
-
 			<Separator orientation={"horizontal"} size={"4"} />
-
 			<div className="flex w-full h-full">
 				<div className="w-full h-full"></div>
 				<Separator orientation={"vertical"} size={"4"} />
@@ -175,9 +180,7 @@ export default function VSCodeRoot({ drag }) {
 					</div>
 				</div>
 			</div>
-
 			<Separator orientation={"horizontal"} size={"4"} />
-
 			<aside className="flex items-stretch gap-2">
 				<button className="p-1" style={{ background: "#0078b9" }}>
 					<DesktopIcon className=" size-3 hover:stroke-white/50" />

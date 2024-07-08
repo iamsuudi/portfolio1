@@ -216,7 +216,16 @@ export function RootFolder({ drag }) {
 					left: position.left,
 					zIndex: layer.indexOf("FileManager"),
 				}}
-				className={`flex bg-black/60 backdrop-blur-sm rounded-xl`}>
+				className={`flex bg-black/60 backdrop-blur-sm rounded-xl`}
+				onClick={() => {
+					const previousIndex = layer.indexOf("FileManager");
+					if (previousIndex + 1 !== layer.length)
+						setLayer([
+							...layer.slice(0, previousIndex),
+							...layer.slice(previousIndex + 1),
+							"FileManager",
+						]);
+				}}>
 				<div className="flex flex-col text-sm w-60">
 					<div
 						className="flex items-center justify-between w-full p-4 hover:cursor-grabbing hover:bg-black/30"
