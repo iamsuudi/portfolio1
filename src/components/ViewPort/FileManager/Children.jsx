@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { Avatar } from "@radix-ui/themes";
 import { PathContext } from "./RootFolder";
+import { useState, useEffect } from "react";
 
 function Folder({ dir }) {
 	const { setPath, setHistory, history, pointer, setPointer } =
@@ -15,8 +16,7 @@ function Folder({ dir }) {
 
 				setPointer(pointer + 1);
 			}}
-			className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/10"
-		>
+			className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/10">
 			<Avatar src="folder.png" fallback="Icon" size={"4"} />
 			<span className="text-sm">{dir.name}</span>
 		</button>
@@ -24,13 +24,59 @@ function Folder({ dir }) {
 }
 
 export default function ChildFolders() {
-	const { children, setPath } = useContext(PathContext);
+	const { setPath, path, history, dirs } = useContext(PathContext);
+	const [children, setChildren] = useState([]);
+
+	useEffect(() => {
+		function pathResolver(paths, directories) {
+			const currentDir = directories.find((d) => d.name === paths[0]);
+
+			const childDirs = currentDir.children;
+
+			if (paths.length === 1) return childDirs;
+
+			return pathResolver(paths.slice(1), childDirs);
+		}
+
+		function recentResolver() {
+			const recentFolders = [];
+
+			const resolver = (paths, directories) => {
+				const currentDir = directories.find((d) => d.name === paths[0]);
+
+				if (paths.length === 1) return currentDir;
+
+				return resolver(paths.slice(1), currentDir.children);
+			};
+
+			for (let path of history) {
+				const folder = resolver(path, dirs);
+				const previousIndex = recentFolders.indexOf(folder);
+
+				if (previousIndex !== -1) {
+					recentFolders.splice(previousIndex, 1);
+				}
+
+				if (!["Recent", "Home"].includes(folder.name))
+					recentFolders.push(folder);
+			}
+
+			return recentFolders.reverse();
+		}
+
+		const isRecentDir = path[path.length - 1] === "Recent";
+
+		const result = isRecentDir
+			? recentResolver()
+			: pathResolver(path, dirs);
+
+		setChildren(result);
+	}, [path, dirs, history]);
 
 	return (
 		<div
 			id="directories"
-			className="flex flex-col w-full h-full gap-1 px-4 pb-3 overflow-y-scroll"
-		>
+			className="flex flex-col w-full h-full gap-1 px-4 pb-3 overflow-y-scroll">
 			{children.length > 0 &&
 				children.map((dir, index) => {
 					return (
@@ -49,8 +95,7 @@ export default function ChildFolders() {
 						viewBox="0 0 24 24"
 						strokeWidth={0.5}
 						stroke="gray"
-						className="size-40"
-					>
+						className="size-40">
 						<path
 							strokeLinecap="round"
 							strokeLinejoin="round"
