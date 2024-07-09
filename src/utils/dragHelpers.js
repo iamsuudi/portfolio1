@@ -34,7 +34,7 @@ export const handleDrag = (e, dragRef, setPosition) => {
 	); // 45rem in pixels
 	const newLeft = Math.max(
 		0,
-		Math.min(window.innerWidth - 70 - 60 * 16, startLeft + dx)
+		Math.min(window.innerWidth - 60 - 60 * 16, startLeft + dx)
 	); // 60rem in pixels
 
 	setPosition({ top: newTop, left: newLeft });

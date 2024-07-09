@@ -261,10 +261,10 @@ export default function SideBar() {
 	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
 
 	return (
-		<div className="flex flex-col justify-center h-full ml-auto w-[70px]">
+		<div className="flex flex-col justify-center w-[60px] h-full ml-auto">
 			<Box className="flex flex-col items-center w-full py-4 rounded-2xl h-fit backdrop-blur-md bg-black/40 max-w-96">
 				<button
-					className="flex p-3 rounded-xl hover:bg-white/10"
+					className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10"
 					onClick={() => {
 						if (
 							!display.find((app) => app.name === "FileManager")
@@ -288,10 +288,13 @@ export default function SideBar() {
 					<Tooltip content="Directories">
 						<Avatar size={3} src="folder.png" className="" />
 					</Tooltip>
+					{display.find((app) => app.name === "FileManager") && (
+						<span className="w-[6px] h-[6px] bg-orange-500 rounded-full absolute right-1"></span>
+					)}
 				</button>
 
 				<button
-					className="flex p-3 rounded-xl hover:bg-white/10"
+					className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10"
 					onClick={() => {
 						if (!display.find((app) => app.name === "VSCode")) {
 							setDisplay(
@@ -313,9 +316,12 @@ export default function SideBar() {
 					<Tooltip content="Visual Studio Code" className="">
 						<Avatar size={3} src="vscode.png" className="" />
 					</Tooltip>
+					{display.find((app) => app.name === "VSCode") && (
+						<span className="w-[6px] h-[6px] bg-orange-500 rounded-full absolute right-1"></span>
+					)}
 				</button>
 
-				<button className="flex p-3 rounded-xl hover:bg-white/10">
+				<button className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10">
 					<Tooltip content="Vivaldi Browser">
 						<Avatar
 							size={3}
@@ -325,7 +331,7 @@ export default function SideBar() {
 					</Tooltip>
 				</button>
 
-				<button className="flex p-3 rounded-xl hover:bg-white/10">
+				<button className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10">
 					<Tooltip content="Warp Terminal">
 						<Avatar
 							size={3}
@@ -337,7 +343,7 @@ export default function SideBar() {
 
 				<Separator size={"3"} />
 
-				<button className="flex p-3 rounded-xl hover:bg-white/10">
+				<button className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10">
 					<Tooltip content="Trash Bin">
 						<Avatar size={3} src="trash.png" className="" />
 					</Tooltip>
@@ -367,7 +373,9 @@ export default function SideBar() {
 							{items.map((item) => {
 								return (
 									<div key={item.type} className="">
-										<p className="text-lg font-bold">{item.type}</p>
+										<p className="text-lg font-bold">
+											{item.type}
+										</p>
 										<div className="flex flex-wrap gap-3">
 											{item.contents.map((content) => {
 												return (
