@@ -55,14 +55,14 @@ export default function ChildFolders() {
 		function pathResolver(paths, directories) {
 			const currentDir = directories.find((d) => d.name === paths[0]);
 
-			const childDirs = currentDir.children;
+			if (paths.length === 1) {
+				return [...currentDir.children, ...currentDir.files];
+			}
 
-			if (paths.length === 1) return [...childDirs, ...currentDir.files];
-
-			return pathResolver(paths.slice(1), childDirs);
+			return pathResolver(paths.slice(1), currentDir.children);
 		}
 
-		const isRecentDir = path[path.length - 1] === "Recent";
+		const isRecentDir = path[0] === "Recent";
 
 		const result = isRecentDir
 			? recent.reverse()
@@ -76,10 +76,10 @@ export default function ChildFolders() {
 			id="directories"
 			className="flex flex-col w-full h-full gap-1 px-4 pb-3 overflow-y-scroll">
 			{children.length > 0 &&
-				children.map((dir, index) => {
+				children.map((dir) => {
 					return (
 						<Folder
-							key={dir.path.toString().concat(index)}
+							key={dir.path.toString()}
 							dir={dir}
 							setPath={setPath}
 						/>

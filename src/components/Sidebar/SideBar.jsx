@@ -284,7 +284,7 @@ export default function SideBar() {
 							]);
 						}
 					}}>
-						<Avatar size={3} src="folder.png" className="" />
+					<Avatar size={3} src="folder.png" className="" />
 					{display.find((app) => app.name === "FileManager") && (
 						<span className="w-[6px] h-[6px] bg-orange-500 rounded-full absolute right-1"></span>
 					)}
@@ -310,32 +310,32 @@ export default function SideBar() {
 							]);
 						}
 					}}>
-						<Avatar size={3} src="vscode.png" className="" />
+					<Avatar size={3} src="vscode.png" className="" />
 					{display.find((app) => app.name === "VSCode") && (
 						<span className="w-[6px] h-[6px] bg-orange-500 rounded-full absolute right-1"></span>
 					)}
 				</button>
 
 				<button className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10">
-						<Avatar
-							size={3}
-							src="https://vivaldi.com/wp-content/uploads/cropped-favicon-270x270.png"
-							className=""
-						/>
+					<Avatar
+						size={3}
+						src="https://vivaldi.com/wp-content/uploads/cropped-favicon-270x270.png"
+						className=""
+					/>
 				</button>
 
 				<button className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10">
-						<Avatar
-							size={3}
-							src="https://cdn.prod.website-files.com/64b6f3636f598299028e8577/64b6ffd4f3b22e830de0bfb1_Webclip%20-%20Warp.png"
-							className=""
-						/>
+					<Avatar
+						size={3}
+						src="https://cdn.prod.website-files.com/64b6f3636f598299028e8577/64b6ffd4f3b22e830de0bfb1_Webclip%20-%20Warp.png"
+						className=""
+					/>
 				</button>
 
 				<Separator size={"3"} />
 
 				<button className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10">
-						<Avatar size={3} src="trash.png" className="" />
+					<Avatar size={3} src="trash.png" className="" />
 				</button>
 
 				<Dialog.Root>

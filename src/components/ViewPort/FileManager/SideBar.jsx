@@ -1,14 +1,37 @@
 import { Separator } from "@radix-ui/themes";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { PathContext } from "./RootFolder";
 import SideButton from "./SideButton";
 import { HamburgerMenuIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 function Buttons() {
 	const { dirs } = useContext(PathContext);
+	const [pinned, setPinned] = useState([]);
+
+	useEffect(() => {
+		const targets = [];
+
+		const traverse = (directory) => {
+			if (directory.children.length > 0)
+				for (let child of directory.children) {
+					if (child.pinned) targets.push(child);
+					traverse(child);
+				}
+		};
+
+		for (let dir of dirs) {
+			if (dir.pinned) {
+				targets.push(dir);
+			}
+			traverse(dir);
+		}
+
+		setPinned(targets);
+	}, [dirs]);
+
 	return (
 		<div className="flex flex-col gap-2 p-4">
-			{dirs.map((dir) => {
+			{pinned.map((dir) => {
 				if (dir.name === "Projects") {
 					return (
 						<div key={dir.name} className="flex flex-col">

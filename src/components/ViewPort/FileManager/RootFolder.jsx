@@ -6,6 +6,7 @@ import {
 	FileTextIcon,
 	GitHubLogoIcon,
 	HomeIcon,
+	ImageIcon,
 	StarFilledIcon,
 } from "@radix-ui/react-icons";
 import { Separator } from "@radix-ui/themes";
@@ -32,6 +33,7 @@ export function RootFolder({ drag }) {
 	const dirs = useMemo(
 		() => [
 			{
+				pinned: true,
 				path: ["Recent"],
 				name: "Recent",
 				icon: <CountdownTimerIcon className="" />,
@@ -39,12 +41,21 @@ export function RootFolder({ drag }) {
 				children: [],
 			},
 			{
+				pinned: true,
 				path: ["Starred"],
 				name: "Starred",
 				icon: <StarFilledIcon className="" />,
 				children: [],
 				files: [
 					{
+						pinned: false,
+						path: ["Starred", "Wadeh Podcast.mp3"],
+						name: "Wadeh Podcast.mp3",
+						type: "file",
+						icon: "audio",
+					},
+					{
+						pinned: false,
 						path: ["Starred", "You can't hurt me.pdf"],
 						name: "You can't hurt me.pdf",
 						type: "file",
@@ -53,78 +64,236 @@ export function RootFolder({ drag }) {
 				],
 			},
 			{
+				pinned: true,
 				path: ["Home"],
 				name: "Home",
 				icon: <HomeIcon className="" />,
 				files: [],
 				children: [
 					{
+						pinned: false,
 						path: ["Home", "Anaconda3"],
 						name: "Anaconda3",
 						files: [],
 						children: [],
 					},
 					{
+						pinned: false,
 						path: ["Home", "AndroidStudioProjects"],
 						name: "AndroidStudioProjects",
 						files: [],
 						children: [],
 					},
 					{
+						pinned: false,
 						path: ["Home", "Books"],
 						name: "Books",
 						files: [],
 						children: [],
 					},
 					{
+						pinned: false,
 						path: ["Home", "Desktop"],
 						name: "Desktop",
 						files: [],
 						children: [],
 					},
 					{
+						pinned: true,
 						path: ["Home", "Documents"],
 						name: "Documents",
-						files: [],
-						children: [],
+						icon: <FileTextIcon className="" />,
+						children: [
+							{
+								pinned: false,
+								path: ["Home", "Documents", "Certificates"],
+								name: "Certificates",
+								files: [],
+								children: [
+									{
+										pinned: false,
+										path: [
+											"Home",
+											"Documents",
+											"Certificates",
+											"Coursera",
+										],
+										name: "Coursera",
+										files: [],
+										children: [],
+									},
+									{
+										pinned: false,
+										path: [
+											"Home",
+											"Documents",
+											"Certificates",
+											"HackerRank",
+										],
+										name: "HackerRank",
+										files: [],
+										children: [],
+									},
+									{
+										pinned: false,
+										path: [
+											"Home",
+											"Documents",
+											"Certificates",
+											"Microsoft",
+										],
+										name: "Microsoft",
+										files: [],
+										children: [],
+									},
+									{
+										pinned: false,
+										path: [
+											"Home",
+											"Documents",
+											"Certificates",
+											"Udemy",
+										],
+										name: "Udemy",
+										files: [],
+										children: [],
+									},
+								],
+							},
+						],
+						files: [
+							{
+								pinned: false,
+								path: ["Home", "Documents", "Resume.pdf"],
+								name: "Resume.pdf",
+								type: "file",
+								icon: "pdf",
+							},
+						],
 					},
 					{
+						pinned: true,
 						path: ["Home", "Downloads"],
 						name: "Downloads",
-						files: [],
-						children: [],
+						icon: <DownloadIcon className="" />,
+						children: [
+							{
+								pinned: false,
+								path: ["Home", "Downloads", "Telegram"],
+								name: "Telegram",
+								files: [],
+								children: [
+									{
+										pinned: false,
+										path: [
+											"Home",
+											"Downloads",
+											"Telegram",
+											"Audios",
+										],
+										name: "Audios",
+										files: [],
+										children: [],
+									},
+									{
+										pinned: false,
+										path: [
+											"Home",
+											"Downloads",
+											"Telegram",
+											"Documents",
+										],
+										name: "Documents",
+										files: [],
+										children: [],
+									},
+									{
+										pinned: false,
+										path: [
+											"Home",
+											"Downloads",
+											"Telegram",
+											"Pictures",
+										],
+										name: "Pictures",
+										files: [],
+										children: [],
+									},
+									{
+										pinned: false,
+										path: [
+											"Home",
+											"Downloads",
+											"Telegram",
+											"Videos",
+										],
+										name: "Videos",
+										files: [],
+										children: [],
+									},
+								],
+							},
+						],
+						files: [
+							{
+								pinned: false,
+								path: [
+									"Home",
+									"Downloads",
+									"Martin Krause - The Complete Developer.pdf",
+								],
+								name: "Martin Krause - The Complete Developer.pdf",
+								type: "file",
+								icon: "pdf",
+							},
+						],
 					},
 					{
+						pinned: false,
 						path: ["Home", "IdeaProjects"],
 						name: "IdeaProjects",
 						files: [],
 						children: [],
 					},
 					{
+						pinned: false,
 						path: ["Home", "Music"],
 						name: "Music",
 						files: [],
 						children: [],
 					},
 					{
+						pinned: true,
 						path: ["Home", "Pictures"],
 						name: "Pictures",
-						files: [],
+						icon: <ImageIcon className="" />,
+						files: [
+							{
+								pinned: false,
+								path: ["Home", "Downloads", "Abdulfetah.jpg"],
+								name: "Abdulfetah.jpg",
+								type: "file",
+								icon: "image",
+							},
+						],
 						children: [],
 					},
 					{
+						pinned: false,
 						path: ["Home", "Snap"],
 						name: "Snap",
 						files: [],
 						children: [],
 					},
 					{
+						pinned: false,
 						path: ["Home", "Templates"],
 						name: "Templates",
 						files: [],
 						children: [],
 					},
 					{
+						pinned: false,
 						path: ["Home", "Videos"],
 						name: "Videos",
 						files: [],
@@ -133,20 +302,7 @@ export function RootFolder({ drag }) {
 				],
 			},
 			{
-				path: ["Home", "Documents"],
-				name: "Documents",
-				icon: <FileTextIcon className="" />,
-				files: [],
-				children: [],
-			},
-			{
-				path: ["Home", "Downloads"],
-				name: "Downloads",
-				icon: <DownloadIcon className="" />,
-				files: [],
-				children: [],
-			},
-			{
+				pinned: true,
 				path: ["Projects"],
 				name: "Projects",
 				icon: <GitHubLogoIcon className="" />,
@@ -154,6 +310,7 @@ export function RootFolder({ drag }) {
 				children: [],
 			},
 			{
+				pinned: true,
 				path: ["About"],
 				name: "About",
 				icon: <AvatarIcon className="" />,
