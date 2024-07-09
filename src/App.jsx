@@ -6,7 +6,7 @@ function UnSupportedDevice() {
 	return (
 		<div className="w-[100dvw] h-[100dvh] flex justify-center items-center gap-10 flex-col p-5">
 			<Avatar
-				src="gift.png"
+				src="ubuntu.png"
 				fallback="Gift Image"
 				className="animate-bounce size-80"
 			/>
@@ -46,7 +46,7 @@ function LoadingScreen() {
 
 function App() {
 	const [viewPortIsLarge, setViewPortIsLarge] = useState(true);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		const checkViewPortSize = () => {
@@ -71,11 +71,11 @@ function App() {
 		};
 	}, []);
 
+	if (!viewPortIsLarge) return <UnSupportedDevice />;
+
 	if (isLoading) return <LoadingScreen />;
 
-	if (viewPortIsLarge) return <Window />;
-
-	return <UnSupportedDevice />;
+	return <Window />;
 }
 
 export default App;

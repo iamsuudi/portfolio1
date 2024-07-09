@@ -56,7 +56,7 @@ const items = [
 				title: "React.js",
 			},
 			{
-				avatar: "https://expressjs.com/images/favicon.png",
+				avatar: "express.png",
 				description: "Backend Framework",
 				title: "Express.js",
 			},
