@@ -31,7 +31,7 @@ export default function FolderSideBar({ handleDrag }) {
 	return (
 		<div className="flex flex-col text-sm w-60">
 			<div
-				className="flex items-center justify-between w-full p-4 hover:cursor-grabbing hover:bg-black/30"
+				className="flex items-center justify-between w-full p-4 hover:cursor-grabbing"
 				onMouseDown={handleDrag}>
 				<button className="flex items-center justify-center w-6 h-6 rounded-md hover:bg-white/15">
 					<MagnifyingGlassIcon className="size-5" />

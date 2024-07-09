@@ -50,7 +50,7 @@ export default function FolderNavBar({
 
 	return (
 		<div
-			className="flex w-full gap-5 px-4 py-3 hover:cursor-grabbing hover:bg-black/30"
+			className="flex w-full gap-5 px-4 py-3 hover:cursor-grabbing"
 			onMouseDown={handleDrag}>
 			{/* History Tracer */}
 			<div className="flex gap-2">
