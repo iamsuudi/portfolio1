@@ -27,7 +27,7 @@ function ViewPort() {
 	};
 
 	return (
-		<div ref={containerRef} className="relative border viewport">
+		<div ref={containerRef} className="relative viewport">
 			{display.map((App) => {
 				return (
 					<Fragment key={App.name}>

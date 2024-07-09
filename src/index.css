@@ -24,12 +24,14 @@
 }
 
 #notification-panel::-webkit-scrollbar,
-#directories::-webkit-scrollbar {
+#directories::-webkit-scrollbar,
+#tools-panel::-webkit-scrollbar {
 	display: none;
 }
 
 #notification-panel,
-#directories {
+#directories,
+#tools-panel {
 	-ms-overflow-style: none;
 	scrollbar-width: none;
 }
