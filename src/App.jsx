@@ -1,7 +1,6 @@
-import { useEffect } from "react";
-import Window from "./components/Window";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Avatar, Progress } from "@radix-ui/themes";
+import Window from "./components/Window";
 
 function UnSupportedDevice() {
 	return (
@@ -11,7 +10,7 @@ function UnSupportedDevice() {
 				fallback="Gift Image"
 				className="animate-bounce size-80"
 			/>
-			<span className={`text-sm font-bold text-center text-amber-600`}>
+			<span className={`text-xs font-bold text-center text-amber-600`}>
 				Use Laptop or Desktop to open me
 			</span>
 		</div>

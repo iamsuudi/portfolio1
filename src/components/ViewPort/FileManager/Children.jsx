@@ -4,27 +4,51 @@ import { PathContext } from "./RootFolder";
 import { useState, useEffect } from "react";
 
 function Folder({ dir }) {
-	const { setPath, setHistory, history, pointer, setPointer } =
-		useContext(PathContext);
+	const {
+		setPath,
+		setHistory,
+		history,
+		pointer,
+		setPointer,
+		recent,
+		setRecent,
+	} = useContext(PathContext);
 
 	return (
 		<button
 			onClick={() => {
-				setPath(dir.path);
+				if (dir.type === "file") {
+					const previousIndex = recent.indexOf(dir);
+					if (previousIndex !== -1) {
+						setRecent([
+							...recent.slice(0, previousIndex),
+							...recent.slice(previousIndex + 1),
+							dir,
+						]);
+					} else {
+						setRecent(recent.concat(dir));
+					}
+				} else {
+					setPath(dir.path);
 
-				setHistory([...history.slice(0, pointer + 1), dir.path]);
+					setHistory([...history.slice(0, pointer + 1), dir.path]);
 
-				setPointer(pointer + 1);
+					setPointer(pointer + 1);
+				}
 			}}
 			className="flex items-center gap-3 p-2 rounded-lg hover:bg-white/10">
-			<Avatar src="folder.png" fallback="Icon" size={"4"} />
+			<Avatar
+				src={`${dir.type === "file" ? dir.icon : "folder"}.png`}
+				fallback="Icon"
+				size={"4"}
+			/>
 			<span className="text-sm">{dir.name}</span>
 		</button>
 	);
 }
 
 export default function ChildFolders() {
-	const { setPath, path, history, dirs } = useContext(PathContext);
+	const { setPath, path, recent, dirs } = useContext(PathContext);
 	const [children, setChildren] = useState([]);
 
 	useEffect(() => {
@@ -33,45 +57,19 @@ export default function ChildFolders() {
 
 			const childDirs = currentDir.children;
 
-			if (paths.length === 1) return childDirs;
+			if (paths.length === 1) return [...childDirs, ...currentDir.files];
 
 			return pathResolver(paths.slice(1), childDirs);
-		}
-
-		function recentResolver() {
-			const recentFolders = [];
-
-			const resolver = (paths, directories) => {
-				const currentDir = directories.find((d) => d.name === paths[0]);
-
-				if (paths.length === 1) return currentDir;
-
-				return resolver(paths.slice(1), currentDir.children);
-			};
-
-			for (let path of history) {
-				const folder = resolver(path, dirs);
-				const previousIndex = recentFolders.indexOf(folder);
-
-				if (previousIndex !== -1) {
-					recentFolders.splice(previousIndex, 1);
-				}
-
-				if (!["Recent", "Home"].includes(folder.name))
-					recentFolders.push(folder);
-			}
-
-			return recentFolders.reverse();
 		}
 
 		const isRecentDir = path[path.length - 1] === "Recent";
 
 		const result = isRecentDir
-			? recentResolver()
+			? recent.reverse()
 			: pathResolver(path, dirs);
 
 		setChildren(result);
-	}, [path, dirs, history]);
+	}, [path, dirs, recent]);
 
 	return (
 		<div
@@ -103,7 +101,16 @@ export default function ChildFolders() {
 						/>
 					</svg>
 
-					<span className="text-xl font-bold">Folder is Empty</span>
+					{path[0] === "Recent" && (
+						<span className="text-xl font-bold">
+							No Recent Opened Files
+						</span>
+					)}
+					{path[0] !== "Recent" && (
+						<span className="text-xl font-bold">
+							Folder is Empty
+						</span>
+					)}
 				</div>
 			)}
 		</div>

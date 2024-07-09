@@ -34,12 +34,12 @@ export default function VSCodeRoot({ drag }) {
 	return (
 		<Draggable name={"VSCode"} size={size} position={position}>
 			<div
-				className={`flex flex-col bg-black/60 backdrop-blur-md rounded-t-xl text-sm w-full h-full`}>
+				className={`flex flex-col bg-black/50 backdrop-blur-sm rounded-t-xl text-sm w-full h-full`}>
 				<header
 					onMouseDown={(e) => {
 						drag(e, dragRef, position, setPosition);
 					}}
-					className="flex items-center w-full p-2 h-fit backdrop-blur-sm hover:border-red-300 hover:cursor-grabbing">
+					className="flex items-center w-full p-2 bg-black/50 h-fit hover:cursor-grabbing">
 					<Avatar src="vscode.png" className="size-5" />
 
 					<p className="ml-auto font-bold">Visual Studio Code</p>

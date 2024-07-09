@@ -22,6 +22,7 @@ export function RootFolder({ drag }) {
 	const [history, setHistory] = useState([["Home"]]);
 	const [pointer, setPointer] = useState(0);
 	const [path, setPath] = useState(history[0]);
+	const [recent, setRecent] = useState([]);
 
 	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
 
@@ -34,6 +35,7 @@ export function RootFolder({ drag }) {
 				path: ["Recent"],
 				name: "Recent",
 				icon: <CountdownTimerIcon className="" />,
+				files: [],
 				children: [],
 			},
 			{
@@ -41,70 +43,91 @@ export function RootFolder({ drag }) {
 				name: "Starred",
 				icon: <StarFilledIcon className="" />,
 				children: [],
+				files: [
+					{
+						path: ["Starred", "You can't hurt me.pdf"],
+						name: "You can't hurt me.pdf",
+						type: "file",
+						icon: "pdf",
+					},
+				],
 			},
 			{
 				path: ["Home"],
 				name: "Home",
 				icon: <HomeIcon className="" />,
+				files: [],
 				children: [
 					{
 						path: ["Home", "Anaconda3"],
 						name: "Anaconda3",
+						files: [],
 						children: [],
 					},
 					{
 						path: ["Home", "AndroidStudioProjects"],
 						name: "AndroidStudioProjects",
+						files: [],
 						children: [],
 					},
 					{
 						path: ["Home", "Books"],
 						name: "Books",
+						files: [],
 						children: [],
 					},
 					{
 						path: ["Home", "Desktop"],
 						name: "Desktop",
+						files: [],
 						children: [],
 					},
 					{
 						path: ["Home", "Documents"],
 						name: "Documents",
+						files: [],
 						children: [],
 					},
 					{
 						path: ["Home", "Downloads"],
 						name: "Downloads",
+						files: [],
 						children: [],
 					},
 					{
 						path: ["Home", "IdeaProjects"],
 						name: "IdeaProjects",
+						files: [],
 						children: [],
 					},
 					{
 						path: ["Home", "Music"],
 						name: "Music",
+						files: [],
 						children: [],
 					},
 					{
 						path: ["Home", "Pictures"],
 						name: "Pictures",
+						files: [],
 						children: [],
 					},
 					{
 						path: ["Home", "Snap"],
 						name: "Snap",
+						files: [],
 						children: [],
 					},
 					{
 						path: ["Home", "Templates"],
 						name: "Templates",
+						files: [],
 						children: [],
 					},
 					{
 						path: ["Home", "Videos"],
 						name: "Videos",
+						files: [],
 						children: [],
 					},
 				],
@@ -113,24 +136,28 @@ export function RootFolder({ drag }) {
 				path: ["Home", "Documents"],
 				name: "Documents",
 				icon: <FileTextIcon className="" />,
+				files: [],
 				children: [],
 			},
 			{
 				path: ["Home", "Downloads"],
 				name: "Downloads",
 				icon: <DownloadIcon className="" />,
+				files: [],
 				children: [],
 			},
 			{
 				path: ["Projects"],
 				name: "Projects",
 				icon: <GitHubLogoIcon className="" />,
+				files: [],
 				children: [],
 			},
 			{
 				path: ["About"],
 				name: "About",
 				icon: <AvatarIcon className="" />,
+				files: [],
 				children: [],
 			},
 		],
@@ -145,6 +172,8 @@ export function RootFolder({ drag }) {
 		setHistory,
 		pointer,
 		setPointer,
+		recent,
+		setRecent,
 	};
 
 	const handleDrag = (e) => {
@@ -155,7 +184,7 @@ export function RootFolder({ drag }) {
 		<PathContext.Provider value={value}>
 			<Draggable name={"FileManager"} size={size} position={position}>
 				<div
-					className={`flex bg-black/60 backdrop-blur-sm rounded-xl w-full h-full`}>
+					className={`flex bg-black/50 backdrop-blur-md rounded-xl w-full h-full`}>
 					<FolderSideBar handleDrag={handleDrag} />
 
 					<Separator

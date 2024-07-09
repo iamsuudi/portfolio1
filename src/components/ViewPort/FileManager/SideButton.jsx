@@ -14,8 +14,7 @@ export default function SideButton({ dir }) {
 
 				setPointer(pointer + 1);
 			}}
-			className="flex items-stretch gap-3 px-4 py-2 rounded-lg hover:bg-white/15"
-		>
+			className="flex items-stretch gap-3 px-4 py-2 rounded-lg hover:bg-white/15">
 			{dir.icon}
 			<span>{dir.name}</span>
 		</button>
