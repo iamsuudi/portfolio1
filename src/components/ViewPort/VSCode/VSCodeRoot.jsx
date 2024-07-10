@@ -26,6 +26,7 @@ import {
 } from "@radix-ui/react-icons";
 import Draggable from "../Drag";
 import Root_tsx from "./Root_tsx";
+import { useEffect } from "react";
 
 export default function VSCodeRoot({ drag }) {
 	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
@@ -46,9 +47,13 @@ export default function VSCodeRoot({ drag }) {
 			content: <>DragHelper functions code</>,
 		},
 	]);
-	const [selected, setSelected] = useState(items[0].trigger);
+	const [selected, setSelected] = useState();
 
 	const dragRef = useRef(null);
+
+	useEffect(() => {
+		setSelected(items.at(0)?.trigger);
+	}, [items]);
 
 	return (
 		<Draggable name={"VSCode"} size={size} position={position}>
@@ -116,7 +121,7 @@ export default function VSCodeRoot({ drag }) {
 						</button>
 					</div>
 				</header>
-				{/* <Separator orientation={"horizontal"} size={"4"} /> */}
+				<Separator orientation={"horizontal"} size={"4"} />
 				<aside
 					className="flex w-full gap-5 px-2 py-1"
 					style={{ height: "2rem" }}>
@@ -188,9 +193,9 @@ export default function VSCodeRoot({ drag }) {
 								id="vscode"
 								className={` max-w-full overflow-y-scroll py-3 font-mono font-normal h-full`}>
 								{
-									items.find(
+									items?.find(
 										(item) => item.trigger === selected
-									).content
+									)?.content
 								}
 							</div>
 						</div>
