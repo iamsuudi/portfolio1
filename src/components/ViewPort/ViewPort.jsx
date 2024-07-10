@@ -35,7 +35,6 @@ function ViewPort() {
 					</Fragment>
 				);
 			})}
-			{/* <DraggableComponent drag={drag} /> */}
 		</div>
 	);
 }

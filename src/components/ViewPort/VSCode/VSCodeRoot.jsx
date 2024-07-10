@@ -7,6 +7,7 @@ import {
 	CheckIcon,
 	CodeIcon,
 	Cross1Icon,
+	Cross2Icon,
 	CrossCircledIcon,
 	CubeIcon,
 	DesktopIcon,
@@ -24,22 +25,44 @@ import {
 	StopIcon,
 } from "@radix-ui/react-icons";
 import Draggable from "../Drag";
+import Root_tsx from "./Root_tsx";
 
 export default function VSCodeRoot({ drag }) {
-	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
 	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
+
+	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
 	const [position, setPosition] = useState({ top: 0, left: 0 });
+	const [items, setItems] = useState([
+		{
+			trigger: "VSCodeRoot.jsx",
+			content: <Root_tsx />,
+		},
+		{
+			trigger: "Draggable.jsx",
+			content: <>Draggable component code</>,
+		},
+		{
+			trigger: "DragHelper.jsx",
+			content: <>DragHelper functions code</>,
+		},
+	]);
+	const [selected, setSelected] = useState(items[0].trigger);
+
 	const dragRef = useRef(null);
 
 	return (
 		<Draggable name={"VSCode"} size={size} position={position}>
 			<div
-				className={`flex flex-col bg-black/50 backdrop-blur-sm rounded-t-xl text-sm w-full h-full`}>
+				className={`flex flex-col bg-black/60 backdrop-blur-sm rounded-t-xl text-sm w-full h-full overflow-hidden`}>
 				<header
 					onMouseDown={(e) => {
 						drag(e, dragRef, position, setPosition);
 					}}
-					className="flex items-center w-full p-2 bg-black/50 h-fit hover:cursor-grabbing">
+					style={{
+						height: "2.5rem",
+						width: "full",
+					}}
+					className="flex items-center p-2 bg-black/50 hover:cursor-grabbing">
 					<Avatar src="vscode.png" className="size-5" />
 
 					<p className="ml-auto font-bold">Visual Studio Code</p>
@@ -94,7 +117,9 @@ export default function VSCodeRoot({ drag }) {
 					</div>
 				</header>
 				{/* <Separator orientation={"horizontal"} size={"4"} /> */}
-				<aside className="flex w-full gap-3 px-2 py-1">
+				<aside
+					className="flex w-full gap-5 px-2 py-1"
+					style={{ height: "2rem" }}>
 					<span className="hover:cursor-pointer text-white/80 hover:text-white">
 						File
 					</span>
@@ -120,11 +145,59 @@ export default function VSCodeRoot({ drag }) {
 						Help
 					</span>
 				</aside>
+
 				<Separator orientation={"horizontal"} size={"4"} />
-				<div className="flex w-full h-full">
-					<div className="w-full h-full"></div>
+
+				<div className="flex w-full h-full overflow-hidden">
+					<div className="flex w-full h-full gap-10 overflow-hidden">
+						<div className="flex flex-col w-full">
+							<div className="flex">
+								{items.map((item) => {
+									return (
+										<button
+											key={item.trigger}
+											className={`flex gap-2 p-1 px-3 text-white/60 ${
+												item.trigger === selected &&
+												"bg-white/15"
+											}`}
+											onClick={() => {
+												setSelected(item.trigger);
+											}}>
+											<span>{item.trigger}</span>
+											<span
+												className="flex items-center p-1 rounded-full bg-white/15 hover:cursor-pointer"
+												onClick={() =>
+													setItems(
+														items.filter(
+															(i) =>
+																i.trigger !==
+																item.trigger
+														)
+													)
+												}>
+												<Cross2Icon className="size-3" />
+											</span>
+										</button>
+									);
+								})}
+							</div>
+
+							<Separator orientation={"horizontal"} size={"4"} />
+
+							<div
+								id="vscode"
+								className={` max-w-full overflow-y-scroll py-3 font-mono font-normal h-full`}>
+								{
+									items.find(
+										(item) => item.trigger === selected
+									).content
+								}
+							</div>
+						</div>
+					</div>
+
 					<Separator orientation={"vertical"} size={"4"} />
-					<div className="h-full w-80">
+					<div className="h-full overflow-hidden w-80">
 						<div className="flex items-start justify-between h-full">
 							<div className="flex flex-col w-full gap-5 py-2">
 								<div className="flex items-center justify-between px-4">
@@ -168,8 +241,11 @@ export default function VSCodeRoot({ drag }) {
 						</div>
 					</div>
 				</div>
+
 				<Separator orientation={"horizontal"} size={"4"} />
-				<aside className="flex items-stretch gap-2">
+				<aside
+					className="flex items-stretch gap-2"
+					style={{ height: "1.5rem" }}>
 					<button className="p-1" style={{ background: "#0078b9" }}>
 						<DesktopIcon className=" size-3 hover:stroke-white/50" />
 					</button>
