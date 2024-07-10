@@ -16,6 +16,7 @@ import FolderSideBar from "./SideBar";
 import ChildFolders from "./Children";
 import { useRef } from "react";
 import Draggable from "../Drag";
+import positioner from "../../../utils/positioner";
 
 export const PathContext = createContext();
 
@@ -27,7 +28,7 @@ export function RootFolder({ drag }) {
 
 	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
 
-	const [position, setPosition] = useState({ top: 0, left: 0 });
+	const [position, setPosition] = useState(positioner);
 	const dragRef = useRef(null);
 
 	const dirs = useMemo(

@@ -27,12 +27,13 @@ import {
 import Draggable from "../Drag";
 import Root_tsx from "./Root_tsx";
 import { useEffect } from "react";
+import positioner from "../../../utils/positioner";
 
 export default function VSCodeRoot({ drag }) {
 	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
 
 	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
-	const [position, setPosition] = useState({ top: 0, left: 0 });
+	const [position, setPosition] = useState(positioner);
 	const [items, setItems] = useState([
 		{
 			trigger: "VSCodeRoot.jsx",
