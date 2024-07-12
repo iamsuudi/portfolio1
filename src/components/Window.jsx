@@ -10,9 +10,11 @@ export const AppContext = createContext();
 export default function Window() {
 	const [display, setDisplay] = useState([]);
 	const [layer, setLayer] = useState([]);
+	const [pdf, setPdf] = useState();
 
 	return (
-		<AppContext.Provider value={{ display, setDisplay, layer, setLayer }}>
+		<AppContext.Provider
+			value={{ display, setDisplay, layer, setLayer, pdf, setPdf }}>
 			<div
 				style={{ backgroundImage: "url('242478.jpg')" }}
 				id="window"

@@ -11,6 +11,7 @@ import { AppContext } from "../Window";
 import { RootFolder } from "../ViewPort/FileManager/RootFolder";
 import VSCodeRoot from "../ViewPort/VSCode/VSCodeRoot";
 import ImageViewer from "../ViewPort/ImageViewer/ImageViewer";
+import PDFReader from "../ViewPort/PDFReader/PDFReader";
 
 const items = [
 	{
@@ -286,6 +287,37 @@ export default function SideBar() {
 									...layer.slice(0, previousIndex),
 									...layer.slice(previousIndex + 1),
 									"ImageViewer",
+								]);
+							}
+						}}>
+						<span className="w-[6px] h-[6px] bg-orange-500 rounded-full absolute right-1"></span>
+						<Avatar size={3} src="image.png" className="" />
+					</button>
+				)}
+				
+				{display.find((app) => app.name === "PDFReader") && (
+					<button
+						className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10"
+						onClick={() => {
+							if (
+								!display.find(
+									(app) => app.name === "PDFReader"
+								)
+							) {
+								setDisplay(
+									display.concat({
+										name: "PDFReader",
+										component: PDFReader,
+									})
+								);
+								setLayer(layer.concat("PDFReader"));
+							} else {
+								const previousIndex =
+									layer.indexOf("PDFReader");
+								setLayer([
+									...layer.slice(0, previousIndex),
+									...layer.slice(previousIndex + 1),
+									"PDFReader",
 								]);
 							}
 						}}>

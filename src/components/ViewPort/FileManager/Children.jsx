@@ -4,6 +4,7 @@ import { PathContext } from "./RootFolder";
 import { useState, useEffect } from "react";
 import { AppContext } from "../../Window";
 import ImageViewer from "../ImageViewer/ImageViewer";
+import PDFReader from "../PDFReader/PDFReader";
 
 function Folder({ dir }) {
 	const {
@@ -15,7 +16,8 @@ function Folder({ dir }) {
 		recent,
 		setRecent,
 	} = useContext(PathContext);
-	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
+	const { layer, setLayer, display, setDisplay, setPdf } =
+		useContext(AppContext);
 
 	return (
 		<button
@@ -30,26 +32,59 @@ function Folder({ dir }) {
 						]);
 					} else {
 						setRecent(recent.concat(dir));
-						if (
-							!display.find(
-								(app) => app.name === "ImageViewer"
-							) &&
-							dir.icon === "image"
-						) {
-							setDisplay(
-								display.concat({
-									name: "ImageViewer",
-									component: ImageViewer,
-								})
-							);
-							setLayer(layer.concat("ImageViewer"));
-						} else {
-							const previousIndex = layer.indexOf("ImageViewer");
-							setLayer([
-								...layer.slice(0, previousIndex),
-								...layer.slice(previousIndex + 1),
-								"ImageViewer",
-							]);
+						switch (dir.icon) {
+							case "image": {
+								if (
+									!display.find(
+										(app) => app.name === "ImageViewer"
+									)
+								) {
+									setDisplay(
+										display.concat({
+											name: "ImageViewer",
+											component: ImageViewer,
+										})
+									);
+									setLayer(layer.concat("ImageViewer"));
+								} else {
+									const previousIndex =
+										layer.indexOf("ImageViewer");
+									setLayer([
+										...layer.slice(0, previousIndex),
+										...layer.slice(previousIndex + 1),
+										"ImageViewer",
+									]);
+								}
+								break;
+							}
+							case "pdf": {
+								if (
+									!display.find(
+										(app) => app.name === "PDFReader"
+									)
+								) {
+									setDisplay(
+										display.concat({
+											name: "PDFReader",
+											component: PDFReader,
+										})
+									);
+									setLayer(layer.concat("PDFReader"));
+									setPdf(dir.name);
+								} else {
+									const previousIndex =
+										layer.indexOf("PDFReader");
+									setLayer([
+										...layer.slice(0, previousIndex),
+										...layer.slice(previousIndex + 1),
+										"PDFReader",
+									]);
+									setPdf(dir.name);
+								}
+								break;
+							}
+							default:
+								break;
 						}
 					}
 				} else {
