@@ -1,9 +1,10 @@
-import { Avatar, Separator } from "@radix-ui/themes";
+import { Avatar, Separator, Spinner } from "@radix-ui/themes";
 import { useContext, useState, useRef } from "react";
 import { AppContext } from "../../Window";
 import { Cross1Icon, MinusIcon, StopIcon } from "@radix-ui/react-icons";
 import Draggable from "../Drag";
 import positioner from "../../../utils/positioner";
+import { useEffect } from "react";
 
 export default function ImageViewer({ drag }) {
 	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
@@ -12,6 +13,16 @@ export default function ImageViewer({ drag }) {
 	const [position, setPosition] = useState(positioner);
 
 	const dragRef = useRef(null);
+
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setLoading(false);
+		}, 5000);
+		
+		return () => clearTimeout(timer);
+	}, []);
 
 	return (
 		<Draggable name={"ImageViewer"} size={size} position={position}>
@@ -85,11 +96,15 @@ export default function ImageViewer({ drag }) {
 				<Separator orientation={"horizontal"} size={"4"} />
 
 				<div className="flex items-center justify-center w-full h-full">
-					<img
-						src="me.png"
-						alt="My picture"
-						className="object-contain w-full h-full aspect-square"
-					/>
+					{loading ? (
+						<Spinner className="size-10" />
+					) : (
+						<img
+							src="me.png"
+							alt="My picture"
+							className="object-contain w-full h-full aspect-square"
+						/>
+					)}
 				</div>
 			</div>
 		</Draggable>

@@ -1,9 +1,10 @@
-import { Avatar, Separator } from "@radix-ui/themes";
+import { Avatar, Separator, Spinner } from "@radix-ui/themes";
 import { useContext, useState, useRef } from "react";
 import { AppContext } from "../../Window";
 import { Cross1Icon, MinusIcon, StopIcon } from "@radix-ui/react-icons";
 import Draggable from "../Drag";
 import positioner from "../../../utils/positioner";
+import { useEffect } from "react";
 
 export default function PDFReader({ drag }) {
 	const { layer, setLayer, display, setDisplay, pdf } =
@@ -13,6 +14,17 @@ export default function PDFReader({ drag }) {
 	const [position, setPosition] = useState(positioner);
 
 	const dragRef = useRef(null);
+
+	const [loading, setLoading] = useState(true);
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setLoading(false);
+		}, 5000);
+
+		return () => clearTimeout(timer);
+	}, []);
+
 	const links = {
 		"Resume.pdf": "Resume.pdf",
 		"Martin Krause - The Complete Developer.pdf":
@@ -93,7 +105,11 @@ export default function PDFReader({ drag }) {
 				<Separator orientation={"horizontal"} size={"4"} />
 
 				<div className="flex items-center justify-center w-full h-full">
-					<iframe src={links[pdf]} className="w-full h-full" />
+					{loading ? (
+						<Spinner className="size-10" />
+					) : (
+						<iframe src={links[pdf]} className="w-full h-full" />
+					)}
 				</div>
 			</div>
 		</Draggable>
