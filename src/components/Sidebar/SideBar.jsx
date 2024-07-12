@@ -10,6 +10,7 @@ import { useContext } from "react";
 import { AppContext } from "../Window";
 import { RootFolder } from "../ViewPort/FileManager/RootFolder";
 import VSCodeRoot from "../ViewPort/VSCode/VSCodeRoot";
+import ImageViewer from "../ViewPort/ImageViewer/ImageViewer";
 
 const items = [
 	{
@@ -262,6 +263,37 @@ export default function SideBar() {
 	return (
 		<div className="flex flex-col justify-center w-[60px] h-full ml-auto">
 			<Box className="flex flex-col items-center w-full py-4 rounded-2xl h-fit backdrop-blur-md bg-black/40 max-w-96">
+				{display.find((app) => app.name === "ImageViewer") && (
+					<button
+						className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10"
+						onClick={() => {
+							if (
+								!display.find(
+									(app) => app.name === "ImageViewer"
+								)
+							) {
+								setDisplay(
+									display.concat({
+										name: "ImageViewer",
+										component: ImageViewer,
+									})
+								);
+								setLayer(layer.concat("ImageViewer"));
+							} else {
+								const previousIndex =
+									layer.indexOf("ImageViewer");
+								setLayer([
+									...layer.slice(0, previousIndex),
+									...layer.slice(previousIndex + 1),
+									"ImageViewer",
+								]);
+							}
+						}}>
+						<span className="w-[6px] h-[6px] bg-orange-500 rounded-full absolute right-1"></span>
+						<Avatar size={3} src="image.png" className="" />
+					</button>
+				)}
+
 				<button
 					className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10"
 					onClick={() => {
