@@ -1,12 +1,71 @@
-import { Avatar, Separator, Spinner } from "@radix-ui/themes";
+import { Avatar, Separator, Slider, Spinner } from "@radix-ui/themes";
 import { useContext, useState, useRef } from "react";
 import { AppContext } from "../../Window";
-import { Cross1Icon, MinusIcon, StopIcon } from "@radix-ui/react-icons";
+import {
+	Cross1Icon,
+	MinusIcon,
+	PauseIcon,
+	PlayIcon,
+	StopIcon,
+} from "@radix-ui/react-icons";
 import Draggable from "../Drag";
 import positioner from "../../../utils/positioner";
 import { useEffect } from "react";
 
-export default function ImageViewer({ drag }) {
+/* eslint react/prop-types: 0 */
+function Audio({ src }) {
+	const [playing, setPlaying] = useState(false);
+	const [currentTime, setCurrentTime] = useState(0);
+	const [duration, setDuration] = useState(0);
+	const audioRef = useRef(null);
+
+	const handlePlay = () => {
+		audioRef.current.play();
+		setPlaying(true);
+	};
+
+	const handlePause = () => {
+		audioRef.current.pause();
+		setPlaying(false);
+	};
+
+	const handleTimeUpdate = () => {
+		setCurrentTime(audioRef.current.currentTime);
+		setDuration(audioRef.current.duration);
+	};
+
+	useEffect(() => {
+		const audioElement = audioRef.current;
+		audioElement.addEventListener("timeupdate", handleTimeUpdate);
+
+		return () => {
+			audioElement.removeEventListener("timeupdate", handleTimeUpdate);
+		};
+	}, []);
+
+	return (
+		<div className="flex flex-col items-center w-full max-w-xl gap-10">
+			<audio ref={audioRef} src={src} />
+			<button
+				onClick={playing ? handlePause : handlePlay}
+				className="flex items-center justify-center p-2">
+				{playing ? (
+					<PauseIcon className="size-24" />
+				) : (
+					<PlayIcon className="size-24" />
+				)}
+			</button>
+			<p className="flex flex-col w-full gap-2">
+				<Slider value={[currentTime.toFixed(2)]} color="orange" />
+				<span>
+					{currentTime.toFixed(2)} / {duration.toFixed(2)}
+				</span>
+			</p>
+		</div>
+	);
+}
+
+export default function AudioPlayer({ drag }) {
 	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
 
 	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
@@ -20,12 +79,12 @@ export default function ImageViewer({ drag }) {
 		const timer = setTimeout(() => {
 			setLoading(false);
 		}, 3000);
-		
+
 		return () => clearTimeout(timer);
 	}, []);
 
 	return (
-		<Draggable name={"ImageViewer"} size={size} position={position}>
+		<Draggable name={"AudioPlayer"} size={size} position={position}>
 			<div
 				className={`flex flex-col bg-black/60 backdrop-blur-sm rounded-xl text-sm w-full h-full overflow-hidden`}>
 				<header
@@ -37,9 +96,9 @@ export default function ImageViewer({ drag }) {
 						width: "full",
 					}}
 					className="flex items-center p-2 bg-black/50 hover:cursor-grabbing">
-					<Avatar src="image.png" className="size-5" />
+					<Avatar src="audio.png" className="size-5" />
 
-					<p className="ml-auto font-bold">Image Viewer</p>
+					<p className="ml-auto font-bold">Audio Player</p>
 
 					{/* Resizing / Closing */}
 					<div className="flex items-center gap-3 ml-auto">
@@ -47,9 +106,9 @@ export default function ImageViewer({ drag }) {
 							className="flex items-center justify-center w-6 h-6 rounded-full bg-white/10 hover:bg-white/25"
 							onClick={() => {
 								const previousIndex =
-									layer.indexOf("ImageViewer");
+									layer.indexOf("AudioPlayer");
 								setLayer([
-									"ImageViewer",
+									"AudioPlayer",
 									...layer.slice(0, previousIndex),
 									...layer.slice(previousIndex + 1),
 								]);
@@ -83,7 +142,7 @@ export default function ImageViewer({ drag }) {
 							onClick={() => {
 								setDisplay(
 									display.filter(
-										(app) => app.name !== "ImageViewer"
+										(app) => app.name !== "AudioPlayer"
 									)
 								);
 								setLayer(layer.slice(0, layer.length - 1));
@@ -95,15 +154,11 @@ export default function ImageViewer({ drag }) {
 
 				<Separator orientation={"horizontal"} size={"4"} />
 
-				<div className="flex items-center justify-center w-full h-full">
+				<div className="flex items-center justify-center w-full h-full p-10">
 					{loading ? (
 						<Spinner className="size-10" />
 					) : (
-						<img
-							src="me.png"
-							alt="My picture"
-							className="object-contain w-full h-full aspect-square"
-						/>
+					<Audio src={"Podcast Three.mp3"} />
 					)}
 				</div>
 			</div>

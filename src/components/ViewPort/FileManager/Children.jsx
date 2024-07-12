@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { AppContext } from "../../Window";
 import ImageViewer from "../ImageViewer/ImageViewer";
 import PDFReader from "../PDFReader/PDFReader";
+import AudioPlayer from "../AudioPlayer/AudioPlayer";
 
 function Folder({ dir }) {
 	const {
@@ -80,6 +81,30 @@ function Folder({ dir }) {
 										"PDFReader",
 									]);
 									setPdf(dir.name);
+								}
+								break;
+							}
+							case "audio": {
+								if (
+									!display.find(
+										(app) => app.name === "AudioPlayer"
+									)
+								) {
+									setDisplay(
+										display.concat({
+											name: "AudioPlayer",
+											component: AudioPlayer,
+										})
+									);
+									setLayer(layer.concat("AudioPlayer"));
+								} else {
+									const previousIndex =
+										layer.indexOf("AudioPlayer");
+									setLayer([
+										...layer.slice(0, previousIndex),
+										...layer.slice(previousIndex + 1),
+										"AudioPlayer",
+									]);
 								}
 								break;
 							}

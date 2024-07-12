@@ -12,6 +12,7 @@ import { RootFolder } from "../ViewPort/FileManager/RootFolder";
 import VSCodeRoot from "../ViewPort/VSCode/VSCodeRoot";
 import ImageViewer from "../ViewPort/ImageViewer/ImageViewer";
 import PDFReader from "../ViewPort/PDFReader/PDFReader";
+import AudioPlayer from "../ViewPort/AudioPlayer/AudioPlayer";
 
 const items = [
 	{
@@ -323,6 +324,37 @@ export default function SideBar() {
 						}}>
 						<span className="w-[6px] h-[6px] bg-orange-500 rounded-full absolute right-1"></span>
 						<Avatar size={3} src="image.png" className="" />
+					</button>
+				)}
+				
+				{display.find((app) => app.name === "AudioPlayer") && (
+					<button
+						className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10"
+						onClick={() => {
+							if (
+								!display.find(
+									(app) => app.name === "AudioPlayer"
+								)
+							) {
+								setDisplay(
+									display.concat({
+										name: "AudioPlayer",
+										component: AudioPlayer,
+									})
+								);
+								setLayer(layer.concat("AudioPlayer"));
+							} else {
+								const previousIndex =
+									layer.indexOf("AudioPlayer");
+								setLayer([
+									...layer.slice(0, previousIndex),
+									...layer.slice(previousIndex + 1),
+									"AudioPlayer",
+								]);
+							}
+						}}>
+						<span className="w-[6px] h-[6px] bg-orange-500 rounded-full absolute right-1"></span>
+						<Avatar size={3} src="audio.png" className="" />
 					</button>
 				)}
 
