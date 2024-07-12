@@ -97,6 +97,7 @@ export default function VSCodeRoot({ drag }) {
 										width: "60rem",
 										height: "40rem",
 									});
+									setPosition(positioner());
 								} else {
 									// console.log("maximize size");
 									setSize({

@@ -351,13 +351,14 @@ export function RootFolder({ drag }) {
 						orientation={"vertical"}
 					/>
 
-					<div className="flex flex-col w-full gap-5 text-sm">
+					<div className="flex flex-col w-full text-sm">
 						<FolderNavBar
 							handleDrag={handleDrag}
 							size={size}
 							setSize={setSize}
 							setPosition={setPosition}
 						/>
+						<Separator size={'4'} orientation={'horizontal'} mb={'3'}/>
 						<ChildFolders />
 					</div>
 				</div>

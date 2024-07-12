@@ -12,6 +12,7 @@ import { useContext } from "react";
 import { PathContext } from "./RootFolder";
 import { Fragment } from "react";
 import { AppContext } from "../../Window";
+import positioner from "../../../utils/positioner";
 
 function FolderNavButton({ name, index }) {
 	const { path, setPath, setHistory, history, pointer, setPointer } =
@@ -130,6 +131,7 @@ export default function FolderNavBar({
 								width: "60rem",
 								height: "40rem",
 							});
+							setPosition(positioner());
 						} else {
 							console.log("maximize size");
 							setSize({

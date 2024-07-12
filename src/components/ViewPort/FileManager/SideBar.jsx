@@ -52,7 +52,7 @@ function Buttons() {
 
 export default function FolderSideBar({ handleDrag }) {
 	return (
-		<div className="flex flex-col text-sm w-60">
+		<div className="flex flex-col text-sm w-60 bg-black/20">
 			<div
 				className="flex items-center justify-between w-full p-4 hover:cursor-grabbing"
 				onMouseDown={handleDrag}>
