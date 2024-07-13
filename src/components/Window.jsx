@@ -11,10 +11,21 @@ export default function Window() {
 	const [display, setDisplay] = useState([]);
 	const [layer, setLayer] = useState([]);
 	const [pdf, setPdf] = useState();
+	const [mode, setMode] = useState();
+
+	const value = {
+		display,
+		setDisplay,
+		layer,
+		setLayer,
+		pdf,
+		setPdf,
+		mode,
+		setMode,
+	};
 
 	return (
-		<AppContext.Provider
-			value={{ display, setDisplay, layer, setLayer, pdf, setPdf }}>
+		<AppContext.Provider value={value}>
 			<div
 				style={{ backgroundImage: "url('242478.jpg')" }}
 				id="window"

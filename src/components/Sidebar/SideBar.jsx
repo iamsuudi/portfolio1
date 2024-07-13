@@ -323,7 +323,7 @@ export default function SideBar() {
 							}
 						}}>
 						<span className="w-[6px] h-[6px] bg-orange-500 rounded-full absolute right-1"></span>
-						<Avatar size={3} src="image.png" className="" />
+						<Avatar size={3} src="pdf.png" className="" />
 					</button>
 				)}
 				

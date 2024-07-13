@@ -2,7 +2,35 @@ import { useContext } from "react";
 import { AppContext } from "../Window";
 
 export default function Draggable({ name, size, position, children }) {
-	const { layer, setLayer } = useContext(AppContext);
+	const { layer, setLayer, mode, setMode } = useContext(AppContext);
+
+	if (mode === "Recent")
+		return (
+			<div
+				style={{
+					width: "50%",
+					height: "50%",
+					transform: "scale(0.95)",
+					transformOrigin: "center",
+					aspectRatio: "3/2",
+					overflow: "hidden",
+				}}
+				className="relative">
+				<button
+					className="absolute z-10 w-full h-full"
+					onClick={() => {
+						const previousIndex = layer.indexOf(name);
+						if (previousIndex + 1 !== layer.length)
+							setLayer([
+								...layer.slice(0, previousIndex),
+								...layer.slice(previousIndex + 1),
+								name,
+							]);
+						setMode("Normal");
+					}}></button>
+				<div className="w-full h-full">{children}</div>
+			</div>
+		);
 
 	return (
 		<div

@@ -11,6 +11,8 @@ import {
 import Calendar from "./calendar";
 import NotificationPanel from "./NotificationPanel";
 import MenuPanel from "./MenuPanel";
+import { useContext } from "react";
+import { AppContext } from "../Window";
 
 function DateFormatted() {
 	const [time, setTime] = useState(new Date());
@@ -26,10 +28,17 @@ function DateFormatted() {
 }
 
 export default function HeaderBar() {
+	const { mode, setMode } = useContext(AppContext);
+
 	return (
 		<div className="flex items-center justify-between w-[100dvw] h-8 backdrop-blur-lg bg-black/30">
-			<div className="flex items-center h-full px-8 rounded-2xl hover:bg-white/10">
-				<button className="">
+			<div className="flex items-center h-full rounded-2xl hover:bg-white/10">
+				<button
+					className="px-8 "
+					onClick={() => {
+						if (mode === "Recent") setMode("Normal");
+						else setMode("Recent");
+					}}>
 					<DashboardIcon />
 				</button>
 			</div>

@@ -26,14 +26,16 @@
 #notification-panel::-webkit-scrollbar,
 #directories::-webkit-scrollbar,
 #tools-panel::-webkit-scrollbar,
-#vscode::-webkit-scrollbar {
+#vscode::-webkit-scrollbar,
+#recents::-webkit-scrollbar {
 	display: none;
 }
 
 #notification-panel,
 #directories,
 #tools-panel,
-#vscode {
+#vscode,
+#recents {
 	-ms-overflow-style: none;
 	scrollbar-width: none;
 }
