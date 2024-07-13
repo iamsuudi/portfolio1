@@ -7,7 +7,7 @@ import positioner from "../../../utils/positioner";
 import { useEffect } from "react";
 
 export default function PDFReader({ drag }) {
-	const { layer, setLayer, display, setDisplay, pdf } =
+	const { layer, setLayer, display, setDisplay, pdf, mode } =
 		useContext(AppContext);
 
 	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
@@ -105,7 +105,7 @@ export default function PDFReader({ drag }) {
 				<Separator orientation={"horizontal"} size={"4"} />
 
 				<div className="flex items-center justify-center w-full h-full">
-					{loading ? (
+					{loading && mode !== "Recent" ? (
 						<Spinner className="size-10" />
 					) : (
 						<iframe src={links[pdf]} className="w-full h-full" />

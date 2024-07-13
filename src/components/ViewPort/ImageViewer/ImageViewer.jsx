@@ -7,7 +7,7 @@ import positioner from "../../../utils/positioner";
 import { useEffect } from "react";
 
 export default function ImageViewer({ drag }) {
-	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
+	const { layer, setLayer, display, setDisplay, mode } = useContext(AppContext);
 
 	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
 	const [position, setPosition] = useState(positioner);
@@ -96,7 +96,7 @@ export default function ImageViewer({ drag }) {
 				<Separator orientation={"horizontal"} size={"4"} />
 
 				<div className="flex items-center justify-center w-full h-full">
-					{loading ? (
+					{loading && mode !== "Recent" ? (
 						<Spinner className="size-10" />
 					) : (
 						<img

@@ -56,9 +56,9 @@ function Audio({ src }) {
 				)}
 			</button>
 			<p className="flex flex-col w-full gap-2">
-				<Slider value={[(currentTime * 100 / duration).toFixed(2)]} color="orange" />
+				<Slider value={[(currentTime * 100 / duration).toFixed(1)]} color="orange" />
 				<span>
-					{currentTime.toFixed(2)} / {duration.toFixed(2)}
+					{currentTime.toFixed(1)} / {duration.toFixed(1)}
 				</span>
 			</p>
 		</div>
@@ -66,7 +66,7 @@ function Audio({ src }) {
 }
 
 export default function AudioPlayer({ drag }) {
-	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
+	const { layer, setLayer, display, setDisplay, mode } = useContext(AppContext);
 
 	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
 	const [position, setPosition] = useState(positioner);
@@ -155,7 +155,7 @@ export default function AudioPlayer({ drag }) {
 				<Separator orientation={"horizontal"} size={"4"} />
 
 				<div className="flex items-center justify-center w-full h-full p-10">
-					{loading ? (
+					{loading && mode !== "Recent" ? (
 						<Spinner className="size-10" />
 					) : (
 					<Audio src={"Podcast Three.mp3"} />
