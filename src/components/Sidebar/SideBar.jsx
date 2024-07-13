@@ -13,6 +13,7 @@ import VSCodeRoot from "../ViewPort/VSCode/VSCodeRoot";
 import ImageViewer from "../ViewPort/ImageViewer/ImageViewer";
 import PDFReader from "../ViewPort/PDFReader/PDFReader";
 import AudioPlayer from "../ViewPort/AudioPlayer/AudioPlayer";
+import VivaldiRoot from "../ViewPort/Vivaldi/VivaldiRoot";
 
 const items = [
 	{
@@ -295,15 +296,13 @@ export default function SideBar() {
 						<Avatar size={3} src="image.png" className="" />
 					</button>
 				)}
-				
+
 				{display.find((app) => app.name === "PDFReader") && (
 					<button
 						className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10"
 						onClick={() => {
 							if (
-								!display.find(
-									(app) => app.name === "PDFReader"
-								)
+								!display.find((app) => app.name === "PDFReader")
 							) {
 								setDisplay(
 									display.concat({
@@ -326,7 +325,7 @@ export default function SideBar() {
 						<Avatar size={3} src="pdf.png" className="" />
 					</button>
 				)}
-				
+
 				{display.find((app) => app.name === "AudioPlayer") && (
 					<button
 						className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10"
@@ -412,12 +411,34 @@ export default function SideBar() {
 					)}
 				</button>
 
-				<button className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10">
+				<button
+					className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10"
+					onClick={() => {
+						if (!display.find((app) => app.name === "Vivaldi")) {
+							setDisplay(
+								display.concat({
+									name: "Vivaldi",
+									component: VivaldiRoot,
+								})
+							);
+							setLayer(layer.concat("Vivaldi"));
+						} else {
+							const previousIndex = layer.indexOf("Vivaldi");
+							setLayer([
+								...layer.slice(0, previousIndex),
+								...layer.slice(previousIndex + 1),
+								"Vivaldi",
+							]);
+						}
+					}}>
 					<Avatar
 						size={3}
 						src="https://vivaldi.com/wp-content/uploads/cropped-favicon-270x270.png"
 						className=""
 					/>
+					{display.find((app) => app.name === "Vivaldi") && (
+						<span className="w-[6px] h-[6px] bg-orange-500 rounded-full absolute right-1"></span>
+					)}
 				</button>
 
 				<button className="flex items-center justify-between w-full p-2 rounded-xl hover:bg-white/10">
