@@ -56,7 +56,7 @@ function Audio({ src }) {
 				)}
 			</button>
 			<p className="flex flex-col w-full gap-2">
-				<Slider value={[currentTime.toFixed(2)]} color="orange" />
+				<Slider value={[(currentTime * 100 / duration).toFixed(2)]} color="orange" />
 				<span>
 					{currentTime.toFixed(2)} / {duration.toFixed(2)}
 				</span>
