@@ -1,4 +1,4 @@
-import { Avatar, Separator, Spinner, TextField } from "@radix-ui/themes";
+import { Avatar, Separator, TextField } from "@radix-ui/themes";
 import { useContext, useState, useRef, useEffect } from "react";
 import { AppContext } from "../../Window";
 import {
@@ -29,11 +29,10 @@ import positioner from "../../../utils/positioner";
 import { format } from "date-fns";
 
 export default function VivaldiRoot({ drag }) {
-	const { layer, setLayer, display, setDisplay, mode } =
-		useContext(AppContext);
+	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
 
-	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
-	const [position, setPosition] = useState(positioner);
+	const [size, setSize] = useState({ width: "100%", height: "100%" });
+	const [position, setPosition] = useState({ top: 0, left: 0 });
 
 	const dragRef = useRef(null);
 
