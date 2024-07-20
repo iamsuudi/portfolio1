@@ -59,7 +59,7 @@ function App() {
 
 		const timer = setTimeout(() => {
 			setIsLoading(false);
-		}, 10000);
+		}, 5000);
 
 		checkViewPortSize();
 

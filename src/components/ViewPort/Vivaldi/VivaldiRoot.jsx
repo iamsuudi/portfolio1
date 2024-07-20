@@ -1,19 +1,24 @@
-import { Avatar, Separator, TextField } from "@radix-ui/themes";
+import { Avatar, DropdownMenu, Separator, TextField } from "@radix-ui/themes";
 import { useContext, useState, useRef, useEffect } from "react";
 import { AppContext } from "../../Window";
 import {
 	BookmarkIcon,
 	CameraIcon,
+	CheckIcon,
 	ChevronLeftIcon,
 	ChevronRightIcon,
 	CodeIcon,
+	Component1Icon,
 	CountdownTimerIcon,
 	Cross1Icon,
+	CrossCircledIcon,
 	DownloadIcon,
 	GearIcon,
+	GlobeIcon,
 	InputIcon,
 	LetterCaseCapitalizeIcon,
 	LightningBoltIcon,
+	ListBulletIcon,
 	LockClosedIcon,
 	MinusIcon,
 	MixIcon,
@@ -22,6 +27,7 @@ import {
 	ReloadIcon,
 	SquareIcon,
 	StopIcon,
+	TriangleDownIcon,
 	ViewVerticalIcon,
 } from "@radix-ui/react-icons";
 import Draggable from "../Drag";
@@ -38,6 +44,51 @@ export default function VivaldiRoot({ drag }) {
 
 	const [loading, setLoading] = useState(true);
 	const [date, setDate] = useState(new Date());
+
+	const [isTabVisible, setisTabVisible] = useState(true);
+
+	const [workspaces] = useState([
+		{
+			name: "Portfolio workspace",
+			id: "workspace-1",
+			tabs: [
+				{ title: "Github - iamsuudi" },
+				{ title: "Radix Components" },
+				{ title: "Tailwindcss" },
+				{ title: "Portfolio - Abdulfetah Suudi" },
+			],
+		},
+		{
+			name: "Members Only",
+			id: "workspace-2",
+			tabs: [
+				{ title: "GSAP Animations" },
+				{ title: "Zod" },
+				{ title: "Shadcn Components" },
+			],
+		},
+		{
+			name: "The Odin Project",
+			id: "workspace-3",
+			tabs: [
+				{ title: "Environmental Variables" },
+				{ title: "Where's Waldo" },
+				{ title: "Prisma" },
+			],
+		},
+		{
+			name: "HackerRank",
+			id: "workspace-4",
+			tabs: [],
+		},
+	]);
+
+	const [currentWorkspace, setCurrentWorkspace] = useState(
+		"Portfolio workspace"
+	);
+	const [currentTab, setCurrentTab] = useState(
+		"Portfolio - Abdulfetah Suudi"
+	);
 
 	useEffect(() => {
 		const loaderTimer = setTimeout(() => {
@@ -73,7 +124,9 @@ export default function VivaldiRoot({ drag }) {
 							className="size-5"
 						/>
 
-						<button className="flex items-center justify-center rounded w-7 h-7 hover:bg-white/10">
+						<button
+							className="flex items-center justify-center rounded w-7 h-7 hover:bg-white/10"
+							onClick={() => setisTabVisible(!isTabVisible)}>
 							<ViewVerticalIcon />
 						</button>
 
@@ -158,46 +211,136 @@ export default function VivaldiRoot({ drag }) {
 
 				<div className="flex flex-col w-full h-full">
 					<div className="flex w-full h-full">
-						<aside className="flex flex-col gap-6 px-3 py-5">
-							<BookmarkIcon className="size-5 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
-							<DownloadIcon className="size-5 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
-							<CountdownTimerIcon className="size-5 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
-							<Pencil2Icon className="size-5 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
-							<LetterCaseCapitalizeIcon className="size-5 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
-							<LightningBoltIcon className="size-5 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
+						{isTabVisible && (
+							<aside className="flex flex-col gap-6 px-3 py-5">
+								<BookmarkIcon className="size-5 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
+								<DownloadIcon className="size-5 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
+								<CountdownTimerIcon className="size-5 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
+								<Pencil2Icon className="size-5 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
+								<LetterCaseCapitalizeIcon className="size-5 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
+								<LightningBoltIcon className="size-5 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
 
-							<Avatar
-								src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico"
-								size={"1"}
-								className="hover:cursor-pointer"
-							/>
-							<Avatar
-								src="https://github.com/fluidicon.png"
-								size={"1"}
-								className="hover:cursor-pointer"
-							/>
-							<Avatar
-								src="chatgpt.png"
-								size={"1"}
-								className="hover:cursor-pointer"
-							/>
-							<PlusIcon className="size-5 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
+								<Avatar
+									src="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico"
+									size={"1"}
+									className="hover:cursor-pointer"
+								/>
+								<Avatar
+									src="https://github.com/fluidicon.png"
+									size={"1"}
+									className="hover:cursor-pointer"
+								/>
+								<Avatar
+									src="chatgpt.png"
+									size={"1"}
+									className="hover:cursor-pointer"
+								/>
+								<PlusIcon className="size-5 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
 
-							<GearIcon className="mt-auto size-5 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
-						</aside>
+								<GearIcon className="mt-auto size-5 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
+							</aside>
+						)}
+
+						<Separator orientation={"vertical"} size={"4"} />
+
+						<div className="flex flex-col h-full gap-2 p-2 w-80 bg-black/20">
+							<DropdownMenu.Root>
+								<DropdownMenu.Trigger>
+									<button className="flex items-center gap-3 px-2 py-3 rounded-md bg-white/10">
+										<Component1Icon />
+										<span className="">Workspaces</span>
+										<TriangleDownIcon className="ml-auto opacity-70 size-5" />
+									</button>
+								</DropdownMenu.Trigger>
+								<DropdownMenu.Content className="p-2 bg-black/50 backdrop-blur-lg">
+									<div className="flex flex-col w-[13.5rem] gap-2">
+										{workspaces.map((workspace) => {
+											const selected =
+												workspace.name ===
+												currentWorkspace;
+											return (
+												<button
+													key={workspace.id}
+													className={`flex items-center justify-between px-2 py-1 rounded-lg hover:bg-white/10 ${
+														selected && "bg-white/5"
+													}`}
+													onClick={() =>
+														setCurrentWorkspace(
+															workspace.name
+														)
+													}>
+													<div className="flex flex-col">
+														<span className="font-bold text-white/70">
+															{workspace.name}
+														</span>
+														<span className="text-xs text-white/70 text-start">
+															{
+																workspace.tabs
+																	.length
+															}{" "}
+															tabs
+														</span>
+													</div>
+													{selected ? (
+														<CheckIcon className=" size-5 stroke-orange-400" />
+													) : (
+														<ListBulletIcon className="" />
+													)}
+												</button>
+											);
+										})}
+									</div>
+								</DropdownMenu.Content>
+							</DropdownMenu.Root>
+							<Separator orientation={"horizontal"} size={"4"} />
+							{workspaces
+								.find(
+									(workspace) =>
+										workspace.name === currentWorkspace
+								)
+								.tabs.map((tab) => {
+									const selected = tab.title === currentTab;
+									return (
+										<button
+											key={tab}
+											onClick={() =>
+												setCurrentTab(tab.title)
+											}
+											className={`flex items-center gap-3 p-2 w-60 h-9 rounded-lg ${
+												selected && "bg-white/5"
+											} hover:bg-white/10`}>
+											<GlobeIcon />
+											<span className="w-56 h-6 overflow-hidden overflow-y-hidden text-ellipsis text-start">
+												{tab.title}
+											</span>
+										</button>
+									);
+								})}
+						</div>
+
 						<Separator orientation={"vertical"} size={"4"} />
 
 						<div className="flex items-center justify-center w-full h-full">
-							{!loading && (
+							{!loading &&
+							currentTab === "Portfolio - Abdulfetah Suudi" ? (
 								<iframe
 									src={window.location.href}
 									className="w-full h-full"
 								/>
+							) : (
+								<div className="flex flex-col items-center gap-5">
+									<CrossCircledIcon className="opacity-40 size-40" />
+									<span className="text-lg text-gray-300">
+										We can&apos;t perform request to this
+										origin
+									</span>
+								</div>
 							)}
 						</div>
 					</div>
 
 					<Separator orientation={"horizontal"} size={"4"} />
+
 					<aside className="flex items-center gap-6 px-3 py-1">
 						<InputIcon className="size-3 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
 						<MixIcon className="size-3 hover:cursor-pointer stroke-white/5 hover:stroke-white/50" />
