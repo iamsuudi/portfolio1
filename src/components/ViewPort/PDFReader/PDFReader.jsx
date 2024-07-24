@@ -26,7 +26,8 @@ export default function PDFReader({ drag }) {
 	}, []);
 
 	const links = {
-		"Resume.pdf": "Resume.pdf",
+		"Resume.pdf":
+			"https://download.library.lol/main/4218000/a01eb641ddde34df8b4ae2e61da416d5/Martin%20Krause%20-%20The%20Complete%20Developer_%20Master%20the%20Full%20Stack%20with%20TypeScript%2C%20React%2C%20Next.js%2C%20MongoDB%2C%20and%20Docker-No%20Starch%20Press%20%282024%29.pdf",
 		"Martin Krause - The Complete Developer.pdf":
 			"https://download.library.lol/main/4218000/a01eb641ddde34df8b4ae2e61da416d5/Martin%20Krause%20-%20The%20Complete%20Developer_%20Master%20the%20Full%20Stack%20with%20TypeScript%2C%20React%2C%20Next.js%2C%20MongoDB%2C%20and%20Docker-No%20Starch%20Press%20%282024%29.pdf",
 		"You can't hurt me.pdf":

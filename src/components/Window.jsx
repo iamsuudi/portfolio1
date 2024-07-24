@@ -75,13 +75,13 @@ export default function Window() {
 		mode,
 		setMode,
 		notifications,
-		setNotfications
+		setNotfications,
 	};
 
 	return (
 		<AppContext.Provider value={value}>
 			<div
-				style={{ backgroundImage: "url('242478.jpg')" }}
+				style={{  backgroundImage: "url('242478.jpg')" }}
 				id="window"
 				className="w-[100dvw] h-[100dvh] relative flex flex-col">
 				<HeaderBar />
