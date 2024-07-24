@@ -25,9 +25,11 @@ import {
 	StopIcon,
 } from "@radix-ui/react-icons";
 import Draggable from "../Drag";
-import Root_tsx from "./Root_tsx";
 import { useEffect } from "react";
 import positioner from "../../../utils/positioner";
+import RootTab from "./Tabs/RootTab";
+import DraggableTab from "./Tabs/DraggableTab";
+import DraggHelperTab from "./Tabs/DragHelperTab";
 
 export default function VSCodeRoot({ drag }) {
 	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
@@ -37,15 +39,15 @@ export default function VSCodeRoot({ drag }) {
 	const [items, setItems] = useState([
 		{
 			trigger: "VSCodeRoot.jsx",
-			content: <Root_tsx />,
+			content: <RootTab />,
 		},
 		{
 			trigger: "Draggable.jsx",
-			content: <>Draggable component code</>,
+			content: <DraggableTab />,
 		},
 		{
 			trigger: "DragHelper.jsx",
-			content: <>DragHelper functions code</>,
+			content: <DraggHelperTab />,
 		},
 	]);
 	const [selected, setSelected] = useState();
@@ -193,7 +195,7 @@ export default function VSCodeRoot({ drag }) {
 
 							<div
 								id="vscode"
-								className={` max-w-full overflow-y-scroll py-3 font-mono font-normal h-full`}>
+								className={`max-w-full overflow-y-scroll py-2 pl-3 font-mono font-normal h-full bg-black/0`}>
 								{
 									items?.find(
 										(item) => item.trigger === selected
