@@ -17,7 +17,7 @@ function Folder({ dir }) {
 		recent,
 		setRecent,
 	} = useContext(PathContext);
-	const { layer, setLayer, display, setDisplay, setPdf } =
+	const { layer, setLayer, display, setDisplay, setPdf, minimized, setMinimized } =
 		useContext(AppContext);
 
 	return (
@@ -55,6 +55,11 @@ function Folder({ dir }) {
 										...layer.slice(previousIndex + 1),
 										"ImageViewer",
 									]);
+									setMinimized(
+										minimized.filter(
+											(item) => item !== "ImageViewer"
+										)
+									);
 								}
 								break;
 							}
@@ -81,6 +86,11 @@ function Folder({ dir }) {
 										"PDFReader",
 									]);
 									setPdf(dir.name);
+									setMinimized(
+										minimized.filter(
+											(item) => item !== "PDFReader"
+										)
+									);
 								}
 								break;
 							}
@@ -105,6 +115,11 @@ function Folder({ dir }) {
 										...layer.slice(previousIndex + 1),
 										"AudioPlayer",
 									]);
+									setMinimized(
+										minimized.filter(
+											(item) => item !== "AudioPlayer"
+										)
+									);
 								}
 								break;
 							}

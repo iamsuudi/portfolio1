@@ -32,7 +32,7 @@ import DraggableTab from "./Tabs/DraggableTab";
 import DraggHelperTab from "./Tabs/DragHelperTab";
 
 export default function VSCodeRoot({ drag }) {
-	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
+	const { layer, setLayer, display, setDisplay, minimized, setMinimized } = useContext(AppContext);
 
 	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
 	const [position, setPosition] = useState(positioner);
@@ -86,6 +86,7 @@ export default function VSCodeRoot({ drag }) {
 									...layer.slice(0, previousIndex),
 									...layer.slice(previousIndex + 1),
 								]);
+								setMinimized(minimized.concat("VSCode"));
 							}}>
 							<MinusIcon className="size-[10px] stroke-white" />
 						</button>

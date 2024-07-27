@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import HeaderBar from "./Heading/Heading";
 import SideBar from "./Sidebar/SideBar";
-import ViewPort from "./ViewPort/ViewPort";
+import ViewPort from "./ViewPort";
 import { useState } from "react";
 
 export const AppContext = createContext();
@@ -12,6 +12,7 @@ export default function Window() {
 	const [layer, setLayer] = useState([]);
 	const [pdf, setPdf] = useState();
 	const [mode, setMode] = useState();
+	const [minimized, setMinimized] = useState([]);
 	const [notifications, setNotfications] = useState([
 		{
 			id: "1",
@@ -66,9 +67,9 @@ export default function Window() {
 	]);
 
 	const value = {
-		display,
+		display, // tracks which component to display for each app name
 		setDisplay,
-		layer,
+		layer, // tracks the z index of the components
 		setLayer,
 		pdf,
 		setPdf,
@@ -76,12 +77,14 @@ export default function Window() {
 		setMode,
 		notifications,
 		setNotfications,
+		minimized, // tracks the apps removed / minimzed from layers
+		setMinimized,
 	};
 
 	return (
 		<AppContext.Provider value={value}>
 			<div
-				style={{  backgroundImage: "url('242478.jpg')" }}
+				style={{ backgroundImage: "url('242478.jpg')" }}
 				id="window"
 				className="w-[100dvw] h-[100dvh] relative flex flex-col">
 				<HeaderBar />

@@ -7,7 +7,7 @@ import positioner from "../../../utils/positioner";
 import { useEffect } from "react";
 
 export default function PDFReader({ drag }) {
-	const { layer, setLayer, display, setDisplay, pdf, mode } =
+	const { layer, setLayer, display, setDisplay, pdf, mode, minimized, setMinimized } =
 		useContext(AppContext);
 
 	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
@@ -63,6 +63,7 @@ export default function PDFReader({ drag }) {
 									...layer.slice(0, previousIndex),
 									...layer.slice(previousIndex + 1),
 								]);
+								setMinimized(minimized.concat("PDFReader"));
 							}}>
 							<MinusIcon className="size-[10px] stroke-white" />
 						</button>

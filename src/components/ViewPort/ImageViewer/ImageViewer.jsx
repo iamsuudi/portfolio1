@@ -7,7 +7,7 @@ import positioner from "../../../utils/positioner";
 import { useEffect } from "react";
 
 export default function ImageViewer({ drag }) {
-	const { layer, setLayer, display, setDisplay, mode } = useContext(AppContext);
+	const { layer, setLayer, display, setDisplay, mode, minimized, setMinimized } = useContext(AppContext);
 
 	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
 	const [position, setPosition] = useState(positioner);
@@ -53,6 +53,7 @@ export default function ImageViewer({ drag }) {
 									...layer.slice(0, previousIndex),
 									...layer.slice(previousIndex + 1),
 								]);
+								setMinimized(minimized.concat("ImageViewer"));
 							}}>
 							<MinusIcon className="size-[10px] stroke-white" />
 						</button>

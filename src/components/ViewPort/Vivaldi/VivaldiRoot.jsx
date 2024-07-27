@@ -35,7 +35,7 @@ import positioner from "../../../utils/positioner";
 import { format } from "date-fns";
 
 export default function VivaldiRoot({ drag }) {
-	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
+	const { layer, setLayer, display, setDisplay, minimized, setMinimized } = useContext(AppContext);
 
 	const [size, setSize] = useState({ width: "100%", height: "100%" });
 	const [position, setPosition] = useState({ top: 0, left: 0 });
@@ -167,6 +167,7 @@ export default function VivaldiRoot({ drag }) {
 									...layer.slice(0, previousIndex),
 									...layer.slice(previousIndex + 1),
 								]);
+								setMinimized(minimized.concat("Vivaldi"));
 							}}>
 							<MinusIcon className="size-[10px] stroke-white" />
 						</button>

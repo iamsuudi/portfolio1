@@ -2,7 +2,8 @@ import { useContext } from "react";
 import { AppContext } from "../Window";
 
 export default function Draggable({ name, size, position, children }) {
-	const { layer, setLayer, mode, setMode } = useContext(AppContext);
+	const { layer, setLayer, mode, setMode, minimized, setMinimized } =
+		useContext(AppContext);
 
 	if (mode === "Recent")
 		return (
@@ -27,6 +28,7 @@ export default function Draggable({ name, size, position, children }) {
 								name,
 							]);
 						setMode("Normal");
+						setMinimized(minimized.filter((item) => item !== name));
 					}}></button>
 				<div className="w-full h-full">{children}</div>
 			</div>

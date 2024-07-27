@@ -1,18 +1,14 @@
 import { createContext, Fragment, useContext, useRef } from "react";
 
-import { AppContext } from "../Window";
+import { AppContext } from "./Window";
 
-import {
-	handleDrag,
-	startDragging,
-	stopDragging,
-} from "../../utils/dragHelpers";
-import Recents from "../Recents";
+import { handleDrag, startDragging, stopDragging } from "../utils/dragHelpers";
+import Recents from "./Recents";
 
 export const DragContext = createContext();
 
 function ViewPort() {
-	const { display, mode } = useContext(AppContext);
+	const { display, mode, minimized } = useContext(AppContext);
 	const containerRef = useRef(null);
 
 	const drag = (e, dragRef, position, setPosition) => {
@@ -33,11 +29,12 @@ function ViewPort() {
 				<Recents drag={drag} />
 			) : (
 				display.map((App) => {
-					return (
-						<Fragment key={App.name}>
-							<App.component drag={drag} />
-						</Fragment>
-					);
+					if (!minimized.includes(App.name))
+						return (
+							<Fragment key={App.name}>
+								<App.component drag={drag} />
+							</Fragment>
+						);
 				})
 			)}
 		</div>

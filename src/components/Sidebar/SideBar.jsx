@@ -261,7 +261,8 @@ function ToolButton({ item }) {
 }
 
 export default function SideBar() {
-	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
+	const { layer, setLayer, display, setDisplay, minimized, setMinimized } =
+		useContext(AppContext);
 
 	return (
 		<div className="flex flex-col justify-center w-[60px] h-full ml-auto">
@@ -290,6 +291,11 @@ export default function SideBar() {
 									...layer.slice(previousIndex + 1),
 									"ImageViewer",
 								]);
+								setMinimized(
+									minimized.filter(
+										(item) => item !== "ImageViewer"
+									)
+								);
 							}
 						}}>
 						<span className="w-[6px] h-[6px] bg-orange-500 rounded-full absolute right-1"></span>
@@ -319,6 +325,11 @@ export default function SideBar() {
 									...layer.slice(previousIndex + 1),
 									"PDFReader",
 								]);
+								setMinimized(
+									minimized.filter(
+										(item) => item !== "PDFReader"
+									)
+								);
 							}
 						}}>
 						<span className="w-[6px] h-[6px] bg-orange-500 rounded-full absolute right-1"></span>
@@ -350,6 +361,11 @@ export default function SideBar() {
 									...layer.slice(previousIndex + 1),
 									"AudioPlayer",
 								]);
+								setMinimized(
+									minimized.filter(
+										(item) => item !== "AudioPlayer"
+									)
+								);
 							}
 						}}>
 						<span className="w-[6px] h-[6px] bg-orange-500 rounded-full absolute right-1"></span>
@@ -377,6 +393,11 @@ export default function SideBar() {
 								...layer.slice(previousIndex + 1),
 								"FileManager",
 							]);
+							setMinimized(
+								minimized.filter(
+									(item) => item !== "FileManager"
+								)
+							);
 						}
 					}}>
 					<Avatar size={3} src="folder.png" className="" />
@@ -403,6 +424,11 @@ export default function SideBar() {
 								...layer.slice(previousIndex + 1),
 								"VSCode",
 							]);
+							setMinimized(
+								minimized.filter(
+									(item) => item !== "VSCode"
+								)
+							);
 						}
 					}}>
 					<Avatar size={3} src="vscode.png" className="" />
@@ -429,6 +455,11 @@ export default function SideBar() {
 								...layer.slice(previousIndex + 1),
 								"Vivaldi",
 							]);
+							setMinimized(
+								minimized.filter(
+									(item) => item !== "Vivaldi"
+								)
+							);
 						}
 					}}>
 					<Avatar

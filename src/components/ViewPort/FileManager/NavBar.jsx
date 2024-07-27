@@ -47,7 +47,8 @@ export default function FolderNavBar({
 }) {
 	const { path, setPath, history, pointer, setPointer } =
 		useContext(PathContext);
-	const { layer, setLayer, display, setDisplay } = useContext(AppContext);
+	const { layer, setLayer, display, setDisplay, minimized, setMinimized } =
+		useContext(AppContext);
 
 	return (
 		<div
@@ -116,6 +117,7 @@ export default function FolderNavBar({
 							...layer.slice(0, previousIndex),
 							...layer.slice(previousIndex + 1),
 						]);
+						setMinimized(minimized.concat("FileManager"));
 					}}>
 					<MinusIcon className="size-[10px] stroke-white" />
 				</button>

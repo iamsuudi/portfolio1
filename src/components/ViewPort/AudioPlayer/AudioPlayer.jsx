@@ -66,7 +66,7 @@ function Audio({ src }) {
 }
 
 export default function AudioPlayer({ drag }) {
-	const { layer, setLayer, display, setDisplay, mode } = useContext(AppContext);
+	const { layer, setLayer, display, setDisplay, mode, minimized, setMinimized } = useContext(AppContext);
 
 	const [size, setSize] = useState({ width: "60rem", height: "40rem" });
 	const [position, setPosition] = useState(positioner);
@@ -112,6 +112,7 @@ export default function AudioPlayer({ drag }) {
 									...layer.slice(0, previousIndex),
 									...layer.slice(previousIndex + 1),
 								]);
+								setMinimized(minimized.concat("AudioPlayer"));
 							}}>
 							<MinusIcon className="size-[10px] stroke-white" />
 						</button>
