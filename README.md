@@ -41,6 +41,8 @@ My goal was creating unique portfolio that just mimics my ubuntu desktop. Feel f
 
 -   All folders and files can be opened. Recent opened files are tracked.
 
+-   Vivaldi browser which displays the same website again.
+
 ---
 
 ## What I learned
@@ -58,6 +60,12 @@ Minimizing apps, putting them over eachother and actually changing their their z
 This is the landing page for my web application. I added some cool scroll animaions.
 
 ![Landing Page](./public/readme/landing.png "Landing Page")
+
+**Vivaldi Browser**
+
+This is the the same website being opened and run inside a browser. Opened apps are from the second instance of the website
+
+![Landing Page](./public/readme/image.png "Landing Page")
 
 ## Setup
 
