@@ -1,8 +1,87 @@
-# React + Vite
+# Ubuntu Workspace Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Website: https://suudi.vercel.app/
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+
+-   **Front End:** React | JavaScript | TailwindCSS
+-   **Other Libraries:** Radix-UI | Prism-React-Renderer
+
+---
+
+## Goal
+
+My goal was creating unique portfolio that just mimics my ubuntu desktop. Feel free to clone and customize it
+
+---
+
+## Key Features
+
+-   Booting impression.
+
+-   Apps can minimized and placed on top of eachother/
+
+-   Apps can dragged in the viewport.
+
+-   Removable Notications and Calendar Panel.
+
+-   Awesome recent apps viewer.
+
+-   Menu panel with wifi, sound, and bluetooth buttons.
+
+-   Apps dialog which shows my skills.
+
+-   VS-Code has tabs and codes can be edited.
+
+-   Audio player, Image Viewer and Pdf Reader apps.
+
+-   FileManager has path header, carets and side-buttons for navigation.
+
+-   All folders and files can be opened. Recent opened files are tracked.
+
+---
+
+## What I learned
+
+I learned using tree-like structure in filemanager which simplified the navigation of files and folders for me. 
+
+Minimizing apps, putting them over eachother and actually changing their their z-index was just very simple once I got the data-strucuture right. Acutally I used Queue and Stack exchangeably.
+
+---
+
+## Project Images
+
+**Landing Page**
+
+This is the landing page for my web application. I added some cool scroll animaions.
+
+![Landing Page](./public/readme/landing.png "Landing Page")
+
+## Setup
+
+Installation:
+
+```bash
+git clone git@github.com:iamsuudi/messaging-app.gi
+```
+
+Install Dependencies:
+
+```bash
+pnpm install
+```
+
+Running Dev Server:
+
+```bash
+pnpm dev
+```
+
+Running Prod Server:
+
+```bash
+pnpm build
+pnpm start
+```
