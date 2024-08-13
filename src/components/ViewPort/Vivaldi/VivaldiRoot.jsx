@@ -77,7 +77,7 @@ export default function VivaldiRoot({ drag }) {
 			],
 		},
 		{
-			name: "HackerRank",
+			name: "Leetcode",
 			id: "workspace-4",
 			tabs: [],
 		},
