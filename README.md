@@ -72,7 +72,7 @@ This is the the same website being opened and run inside a browser. Opened apps 
 Installation:
 
 ```bash
-git clone git@github.com:iamsuudi/messaging-app.gi
+git clone git@github.com:iamsuudi/ubuntu.git
 ```
 
 Install Dependencies:
